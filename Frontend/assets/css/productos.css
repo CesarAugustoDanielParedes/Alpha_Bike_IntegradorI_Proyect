@@ -62,21 +62,28 @@ header nav ul li a:hover {
   }
 }
 /* --- FOOTER --- */
-footer {
-  background-color: #0a0a23;
+.footer {
+  background-color: #0a1a2f;
+  /* azul oscuro */
   color: #fff;
   padding: 40px 20px 20px;
+  font-family: Arial, sans-serif;
 }
 
 .footer-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
   gap: 30px;
-  margin-bottom: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.footer-logo h2 {
-  margin: 10px 0;
+.footer-left,
+.footer-center,
+.footer-right {
+  flex: 1;
+  min-width: 250px;
 }
 
 .footer-logo {
@@ -84,67 +91,62 @@ footer {
   margin-bottom: 10px;
 }
 
-.footer-logo p {
-  margin: 10px 0;
+.footer-desc {
   font-size: 0.9rem;
-  color: #ccc;
+  margin: 10px 0 20px;
 }
 
-.footer-contact p,
-.footer-contact a {
-  font-size: 0.9rem;
-  color: #fff;
-  margin: 8px 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.footer-links h3,
-.footer-hours h3,
-.footer-social h3 {
-  margin-bottom: 10px;
+.footer-center h4,
+.footer-right h4 {
+  margin-bottom: 15px;
   font-size: 1.1rem;
+  text-transform: uppercase;
 }
 
-.footer-links a {
-  display: block;
-  color: #ccc;
+.footer-center ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-center ul li {
+  margin-bottom: 10px;
+}
+
+.footer-center ul li a {
   text-decoration: none;
-  margin: 5px 0;
+  color: #fff;
   transition: color 0.3s;
 }
 
-.footer-links a:hover {
+.footer-center ul li a:hover {
   color: #f44336;
+  /* rojo al pasar el mouse */
 }
 
-.footer-hours p {
-  margin: 5px 0;
-}
-
-.footer-social .social-icons {
+.social-icons {
   display: flex;
-  gap: 15px;
+  gap: 10px;
   margin-top: 10px;
 }
 
-.footer-social .social-icons a {
-  font-size: 1.5rem;
-  color: #fff;
-  transition: color 0.3s;
+.social-icons img {
+  width: 28px;
+  height: 28px;
+  filter: brightness(0) invert(1);
+  /* blancos */
+  transition: transform 0.3s;
 }
 
-.footer-social .social-icons a:hover {
-  color: #f44336;
+.social-icons img:hover {
+  transform: scale(1.2);
 }
 
 .footer-bottom {
   background-color: #000;
-  padding: 15px;
   text-align: center;
+  padding: 15px 0;
+  margin-top: 30px;
   font-size: 0.85rem;
-  color: #ccc;
 }
 
 /* Responsive footer */
@@ -242,4 +244,26 @@ body {
   padding: 2px 6px;
   border-radius: 5px;
   font-size: 0.75rem;
+}
+
+/* --- BOTÓN WHATSAPP --- */
+.whatsapp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  z-index: 1000;
+}
+
+.whatsapp img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+
+.whatsapp img:hover {
+  transform: scale(1.1);
 }
