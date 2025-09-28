@@ -33,6 +33,13 @@ header nav ul {
   padding: 0;
 }
 
+.cart {
+  text-decoration: none;
+  color: inherit;   /* mantiene el color original del texto/icono */
+  cursor: pointer;
+  font-size: 18px;
+}
+
 header nav ul li a {
   color: #fff;
   text-decoration: none;

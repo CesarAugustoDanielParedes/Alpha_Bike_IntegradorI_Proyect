@@ -32,52 +32,54 @@
             <a href="registrarse.html" class="btn">Registrarse</a>
             <a href="iniciosesion.html" class="btn">Acceder</a>
             <div class="cart">
-                🛒 <span id="cart-count">0</span>
+                <a href="carrito.html" class="cart">
+                    🛒 <span id="cart-count">0</span>
+                </a>
             </div>
         </div>
     </header>
     <section class="auth-section" style="background-image: url('assets/media/fondologin.jpg');">
-    <div class="auth-overlay"></div>
-    <div class="auth-container">
-      <!-- Logo -->
-      <div class="auth-logo">
-        <img src="assets/media/logoalphabike2.png" alt="Alpha Bike">
-      </div>
+        <div class="auth-overlay"></div>
+        <div class="auth-container">
+            <!-- Logo -->
+            <div class="auth-logo">
+                <img src="assets/media/logoalphabike2.png" alt="Alpha Bike">
+            </div>
 
-      <!-- Título -->
-      <h2>Iniciar Sesión</h2>
+            <!-- Título -->
+            <h2>Iniciar Sesión</h2>
 
-      <!-- Formulario -->
-      <form class="auth-form">
-        <div class="input-group">
-          <span class="icon">👤</span>
-          <input type="email" placeholder="Correo electrónico" required>
+            <!-- Formulario -->
+            <form class="auth-form">
+                <div class="input-group">
+                    <span class="icon">👤</span>
+                    <input type="email" placeholder="Correo electrónico" required>
+                </div>
+
+                <div class="input-group">
+                    <span class="icon">🔑</span>
+                    <input type="password" placeholder="Contraseña" id="login-password" required>
+                    <span class="toggle-pass" onclick="togglePassword('login-password', this)">👁️</span>
+                </div>
+
+                <div class="options">
+                    <label><input type="checkbox"> Recuérdame</label>
+                </div>
+
+                <button type="submit" class="btn-primary">Iniciar Sesión</button>
+                <a href="#" class="forgot-link">¿Has olvidado la contraseña?</a>
+
+                <div class="divider">----------- O accede con -----------</div>
+                <div class="social-login">
+                    <button class="google">G Google</button>
+                    <button class="facebook">f Facebook</button>
+                </div>
+            </form>
+
+            <!-- Link a registro -->
+            <p class="switch-link">¿No tienes cuenta? <a href="registrarse.html">Regístrate aquí</a></p>
         </div>
-
-        <div class="input-group">
-          <span class="icon">🔑</span>
-          <input type="password" placeholder="Contraseña" id="login-password" required>
-          <span class="toggle-pass" onclick="togglePassword('login-password', this)">👁️</span>
-        </div>
-
-        <div class="options">
-          <label><input type="checkbox"> Recuérdame</label>
-        </div>
-
-        <button type="submit" class="btn-primary">Iniciar Sesión</button>
-        <a href="#" class="forgot-link">¿Has olvidado la contraseña?</a>
-
-        <div class="divider">----------- O accede con -----------</div>
-        <div class="social-login">
-          <button class="google">G Google</button>
-          <button class="facebook">f Facebook</button>
-        </div>
-      </form>
-
-      <!-- Link a registro -->
-      <p class="switch-link">¿No tienes cuenta? <a href="registrarse.html">Regístrate aquí</a></p>
-    </div>
-  </section>
+    </section>
 
     <!-- FOOTER -->
     <footer class="footer">

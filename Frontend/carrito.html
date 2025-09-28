@@ -4,13 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alpha Bike - Productos</title>
-    <link rel="stylesheet" href="assets/css/productos.css">
+    <title>Alpha Bike - Carrito de Compras</title>
+    <link rel="stylesheet" href="assets/css/carrito.css">
 </head>
 
 <body>
-
-    <!-- HEADER -->
+    <!-- ===== NAVBAR ===== -->
     <header class="navbar">
         <div class="logo">
             <img src="assets/media/logoalphabike.png" alt="Logo Alpha Bike">
@@ -23,59 +22,30 @@
             <a href="https://wa.me/51912543818">Contacto</a>
         </nav>
 
-        <div class="search">
-            <input type="text" placeholder="Buscar...">
-            <button>🔍</button>
-        </div>
-
         <div class="actions">
-            <a href="registrarse.html" class="btn">Registrarse</a>
-            <a href="iniciosesion.html" class="btn">Acceder</a>
-            <div class="cart">
-                <a href="carrito.html" class="cart">
-                    🛒 <span id="cart-count">0</span>
-                </a>
-            </div>
+            <a href="carrito.html" class="cart">🛒 <span id="cart-count">0</span></a>
+            <button class="btn">Iniciar Sesión</button>
         </div>
     </header>
 
-    <!-- MAIN -->
-    <main class="productos-page">
-        <!-- FILTROS -->
-        <aside class="filtros">
-            <h3>Ordenar por:</h3>
-            <select id="ordenar">
-                <option value="todos">Todos</option>
-                <option value="precioDesc">Precio Mayor a Menor</option>
-                <option value="precioAsc">Precio Menor a Mayor</option>
-                <option value="popularidad">Popularidad</option>
-                <option value="novedad">Novedad</option>
-            </select>
+    <!-- ===== CONTENIDO DEL CARRITO ===== -->
+    <main class="carrito-page" style="padding:40px; max-width:900px; margin:auto;">
+        <h1>🛒 Tu Carrito</h1>
+        <p>Aquí verás los productos que has agregado.</p>
 
-            <h3>Rango de Precio:</h3>
-            <input type="range" id="precioRange" min="0" max="40000" step="500" value="40000">
-            <p>Hasta: <span id="precioMax">40000</span> S/.</p>
+        <!-- Lista de productos -->
+        <div id="cart-items" style="margin-top:20px;">
+            <!-- Aquí se cargan los productos con JS -->
+        </div>
 
-            <h3>Bicicletas:</h3>
-            <label><input type="radio" name="tipo" value="montanera"> Montañera</label><br>
-            <label><input type="radio" name="tipo" value="ruta"> Ruta</label><br>
-            <label><input type="radio" name="tipo" value="bmx"> BMX</label>
+        <!-- Total -->
+        <div id="cart-total" style="margin-top:20px; font-size:1.3rem; font-weight:bold;">
+            Total: S/ 0.00
+        </div>
 
-            <h3>Productos:</h3>
-            <div id="filtroProductos">
-                <!-- checkboxes generados en JS -->
-            </div>
+        <!-- Botón de pagar -->
+        <button id="finalizarCompra" class="btn-red" style="margin-top:20px;">Finalizar Compra</button>
 
-            <h3>Marcas:</h3>
-            <div id="filtroMarcas">
-                <!-- checkboxes generados en JS -->
-            </div>
-        </aside>
-
-        <!-- LISTA DE PRODUCTOS -->
-        <section class="productos-grid" id="productosGrid">
-            <!-- tarjetas dinámicas -->
-        </section>
     </main>
 
     <!-- FOOTER -->
@@ -128,9 +98,8 @@
     </a>
 
 
-
-
-    <script src="assets/js/inicio.js"></script>
+    <!-- Script para mostrar carrito -->
+    <script src="assets/js/compra.js"></script>
 </body>
 
 </html>

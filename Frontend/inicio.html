@@ -32,7 +32,9 @@
             <a href="registrarse.html" class="btn">Registrarse</a>
             <a href="iniciosesion.html" class="btn">Acceder</a>
             <div class="cart">
-                🛒 <span id="cart-count">0</span>
+                <a href="carrito.html" class="cart">
+                  🛒 <span id="cart-count">0</span>
+                </a>
             </div>
         </div>
   </header>
@@ -97,7 +99,7 @@
         <img src="assets/media/montañera.png" alt="Bicicleta Montañera">
         <h3>Montañera</h3>
         <p>Explora</p>
-        <a href="#montanera" class="btn-red">Ver más</a>
+        <a href="#" class="btn-red ver-mas" data-id="1">Ver más</a>
       </div>
 
       <!-- Ruta -->
@@ -105,7 +107,7 @@
         <img src="assets/media/ruta.png" alt="Bicicleta de Ruta">
         <h3>Ruta</h3>
         <p>Explora</p>
-        <a href="#ruta" class="btn-red">Ver más</a>
+        <a href="#" class="btn-red ver-mas" data-id="2">Ver más</a>
       </div>
 
       <!-- BMX -->
@@ -113,7 +115,7 @@
         <img src="assets/media/bmx.png" alt="Bicicleta BMX">
         <h3>BMX</h3>
         <p>Explora</p>
-        <a href="#bmx" class="btn-red">Ver más</a>
+        <a href="#" class="btn-red ver-mas" data-id="3">Ver más</a>
       </div>
     </div>
   </section>
@@ -134,6 +136,26 @@
 
     <button class="carousel-btn right" onclick="moveBrand(1)">❯</button>
   </section>
+
+  <!-- MODAL -->
+<div id="productModal" class="modal" aria-hidden="true">
+  <div class="modal-content">
+    <button class="close">&times;</button>
+
+    <div class="modal-media">
+      <img id="modal-image" src="" alt="Imagen del producto">
+    </div>
+
+    <div class="modal-info">
+      <h3 id="modal-title">Título</h3>
+      <p id="modal-description">Descripción...</p>
+      <div class="modal-row">
+        <div id="modal-price" class="modal-price">S/ 0.00</div>
+        <button class="btn-red" id="buyNowBtn">Comprar ahora</button>
+      </div>
+    </div>
+  </div>
+</div>
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -185,9 +207,8 @@
 </a>
 
 
-
-
   <script src="assets/js/inicio.js"></script>
+  <script src="assets/js/modal.js"></script>
 </body>
 
 </html>

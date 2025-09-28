@@ -46,4 +46,3 @@ function moveBrand(direction) {
   const moveX = -(brandIndex * (carousel.clientWidth / visibleItems));
   carousel.style.transform = `translateX(${moveX}px)`;
 }
-
