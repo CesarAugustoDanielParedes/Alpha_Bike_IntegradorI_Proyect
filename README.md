@@ -53,7 +53,7 @@ El sistema web automatizado permitirá:
 |--------|-----------------------------|
 | RNF01  | El sistema debe contar con buena usabilidad |
 | RNF02  | El sistema debe contener el patrón Modelo-Vista-Controlador |
-| RNF03  | El sistema no debe contar contar con accesibilidad y portabilidad. |
+| RNF03  | El sistema debe contar contar con accesibilidad y portabilidad. |
 
 
 ---
