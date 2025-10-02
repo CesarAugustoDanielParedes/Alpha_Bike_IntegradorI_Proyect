@@ -41,11 +41,9 @@ El sistema web automatizado permitirá:
 
 | Código | Requerimiento Funcional |
 |--------|--------------------------|
-| RF01   | El sistema debe validar el acceso a los usuarios. |
-| RF02   | El sistema debe permitir visualizar la cantidad de ventas del negocio. |
-| RF03   | El sistema debe permitir la búsqueda de productos por tipo, marca y material. |
-| RF04   | El sistema debe permitir la transacción de venta de un producto. |
-| RF05   | El sistema debe permitir generar un reporte de ventas con las ventas realizadas. |
+| RF01   | El sistema debe contar con funcionalidades sobre del cliente |
+| RF02   | El sistema debe contener información relevante del producto |
+| RF03   | El sistema debe contar con funcionalidades sobre los pedidos |
 
 ---
 
@@ -53,11 +51,10 @@ El sistema web automatizado permitirá:
 
 | Código | Requerimiento No Funcional |
 |--------|-----------------------------|
-| RNF01  | El sistema debe contar con una interfaz intuitiva y fácil de usar. |
-| RNF02  | El sistema debe funcionar en distintos dispositivos. |
-| RNF03  | El sistema no debe tardar más de 5 segundos en la visualización de las búsquedas. |
-| RNF04  | El sistema valida las credenciales del usuario antes de su acceso. |
-| RNF05  | El sistema web utilizará el patrón MVC. |
+| RNF01  | El sistema debe contar con buena usabilidad |
+| RNF02  | El sistema debe contener el patrón Modelo-Vista-Controlador |
+| RNF03  | El sistema no debe contar contar con accesibilidad y portabilidad. |
+
 
 ---
 
