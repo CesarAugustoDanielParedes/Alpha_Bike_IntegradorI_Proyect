@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha Bike - Registrarse</title>
+    <link rel="stylesheet" href="assets/css/registrarse.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="navbar">
+        <div class="logo">
+            <img src="assets/media/logoalphabike.png" alt="Logo Alpha Bike">
+        </div>
+
+        <nav class="menu">
+            <a href="inicio.html">Inicio</a>
+            <a href="servicios.html">Servicios</a>
+            <a href="productos.html">Productos</a>
+            <a href="https://wa.me/51912543818">Contacto</a>
+        </nav>
+
+        <div class="search">
+            <input type="text" placeholder="Buscar...">
+            <button>🔍</button>
+        </div>
+
+        <div class="actions">
+            <a href="registrarse.html" class="btn">Registrarse</a>
+            <a href="iniciosesion.html" class="btn">Acceder</a>
+            <div class="cart">
+                <a href="carrito.html" class="cart">
+                  🛒 <span id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+
+    </header>
+
+      <section class="auth-section" style="background-image:url('assets/media/fondologin.jpg')">
+    <div class="auth-overlay"></div>
+    <div class="auth-container">
+      <div class="auth-logo"><img src="assets/media/logoalphabike2.png" alt="Alpha Bike"></div>
+      <h2>Regístrate</h2>
+
+      <form class="auth-form" id="formRegistro">
+        <div class="input-group"><span class="icon">👤</span><input type="text" id="nombre" placeholder="Nombre completo" required></div>
+        <div class="input-group"><span class="icon">📧</span><input type="email" id="correo" placeholder="Correo electrónico" required></div>
+        <div class="input-group"><span class="icon">🔑</span><input type="password" id="contrasena" placeholder="Contraseña" required><span class="toggle-pass" onclick="togglePwd('contrasena',this)">👁️</span></div>
+        <button type="submit" class="btn-primary">Crear Cuenta</button>
+      </form>
+
+      <p class="switch-link">¿Ya tienes cuenta? <a href="iniciosesion.html">Ingresa aquí</a></p>
+    </div>
+  </section>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- IZQUIERDA -->
+            <div class="footer-left">
+                <img src="assets/media/logoalphabike.png" alt="Alpha Bike Logo" class="footer-logo">
+                <h3>ALPHA BIKE</h3>
+                <p class="footer-desc">Tu tienda de confianza para todas tus necesidades de ciclismo</p>
+                <p>📍 Av. A Mz 190 Los Olivos - Lima - Perú</p>
+                <p>📞 +51 912 543 818</p>
+            </div>
+
+            <!-- CENTRO -->
+            <div class="footer-center">
+                <h4>Productos</h4>
+                <ul>
+                    <li><a href="#">Bicicletas de montaña</a></li>
+                    <li><a href="#">Bicicletas de ruta</a></li>
+                    <li><a href="#">Bicicletas eléctricas</a></li>
+                    <li><a href="#">Accesorios</a></li>
+                </ul>
+            </div>
+
+            <!-- DERECHA -->
+            <div class="footer-right">
+                <h4>Horarios</h4>
+                <p>Lunes - Viernes: 8:00 am - 8:00 pm</p>
+                <p>Sábado: 8:00 am - 8:00 pm</p>
+
+                <h4>Síguenos</h4>
+                <div class="social-icons">
+                    <a href="#"><img src="assets/media/facebook.png" alt="Facebook"></a>
+                    <a href="#"><img src="assets/media/instagram.png" alt="Instagram"></a>
+                    <a href="#"><img src="assets/media/youtube.png" alt="YouTube"></a>
+                    <a href="#"><img src="assets/media/tiktok.png" alt="TikTok"></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEGUNDO FOOTER -->
+        <div class="footer-bottom">
+            <p>© 2025 ALPHA BIKE. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    <!-- BOTÓN WHATSAPP -->
+    <a href="https://wa.me/51912543818" class="whatsapp" target="_blank">
+        <img src="assets/media/wasap.png" alt="WhatsApp">
+    </a>
+    <!-- SCRIPT ÚNICO Y FINAL -->
+  <script>
+    // Mostrar/ocultar contraseña
+    function togglePwd(id, icon) {
+      const input = document.getElementById(id);
+      input.type = input.type === 'password' ? 'text' : 'password';
+      icon.textContent = input.type === 'password' ? '👁️' : '🙈';
+    }
+
+    // Registro
+    window.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('formRegistro');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const nombre = document.getElementById('nombre').value.trim();
+        const correo = document.getElementById('correo').value.trim();
+        const contrasena = document.getElementById('contrasena').value.trim();
+
+        if (!nombre || !correo || !contrasena) {
+          alert('Completa todos los campos');
+          return;
+        }
+
+        try {
+          const res = await fetch('http://localhost:3000/api/registro', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nombre, correo, contrasena })
+          });
+          const data = await res.json();
+          alert(data.mensaje || data.error);
+          if (data.mensaje) form.reset();
+        } catch (err) {
+          alert('Error al conectar: ' + err.message);
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
