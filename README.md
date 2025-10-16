@@ -1,27 +1,98 @@
-AlphaBike - Proyecto Spring Boot (migrado desde Node.js)
-=========================================================
+# 🚴‍♂️ Sistema de Gestión para la Tienda Alpha Bike
 
-Contenido:
-- Backend: Spring Boot + JdbcTemplate (Java 21)
-- Frontend: copiado desde tu proyecto original en /src/main/resources/static
+Este es un Proyecto universitario desarrollado por el **Grupo 5** como parte del curso **Curso Integrador I: Sistemas Software** en la **Universidad Tecnológica del Perú (UTP)**.  
 
-Requisitos:
+El sistema busca **automatizar la gestión de ventas, pedidos y mantenimientos** de la tienda Alpha Bike, un negocio que actualmente enfrenta limitaciones debido a sus procesos manuales.  
+El objetivo es ofrecer una experiencia más eficiente y confiable a sus clientes y optimizar las operaciones internas del negocio.
+
+---
+## 📌 Descripción General
+Alpha Bike es una tienda especializada en la **venta y mantenimiento de bicicletas y accesorios**, que ofrece una propuesta de valor única, como el servicio de bicicletas a pedido en menos de 24 horas.  
+
+El sistema web automatizado permitirá:
+- 📦 Gestionar ventas y pedidos en línea.  
+- 🔧 Registrar los mantenimientos realizados.  
+- 📊 Generar reportes de ventas y clientes recurrentes.  
+- 📱 Ofrecer una interfaz intuitiva y ***responsive*** que se adapte a dispositivos como móviles, tablets y PCs.  
+---
+## 🔧 Requisitos Previos
 - Java 21 instalado
+
 - Maven instalado
-- SQL Server (AlphaBikeDB) disponible en localhost:1433
-- Usuario: sa  Password: 123456789
 
-Ejecutar:
-1. Importar la base de datos (si no existe) usando tus scripts SQL.
-2. En la carpeta del proyecto ejecutar:
-   mvn spring-boot:run
-3. Abrir: http://localhost:3000/
+- MySQL con la base de datos AlphaBikeDB disponible en localhost:1433
+---
+## 🔐 Credenciales
+- **Usuario:** sa
 
-Endpoints:
+- **Contraseña:** 123456789
+---
+## 🚀 Instalación y Uso
+*(Se incluirán las instrucciones detalladas para la instalación y configuración del proyecto una vez que se definan las tecnologías de backend y se complete el desarrollo.)*
+
+---
+## 🌐 Endpoints
 - POST /api/registro  { nombre, correo, contrasena }
 - POST /api/login     { correo, contrasena }
 - GET  /api/productos
 
-Notas:
+## 💡 Notas finales de instalación
 - Las contraseñas se guardan con BCrypt.
 - Si tu tabla Usuarios tiene columnas diferentes (nombres distintos), ajusta las queries en UsuarioController.java.
+---
+
+## ⚙️ Tecnologías y Requerimientos
+
+### 🛠 Tecnologías Utilizadas
+- **Frontend:**  HTML, CSS, 
+- **Backend:**  JavaScript (__JS__)
+	-  **Arquitectura:** MVC
+	- **Principios de Diseño:** SOLID, TDD 
+- **Base de datos:** MySql
+- **Herramientas de diseño:** Figma y Balsamiq (prototipos de la interfaz)  
+- **Librerías de Apoyo:**
+	- **Google Guava** → _utilidades para colecciones, caching, etc._
+	- **Apache POI** → _para exportar reportes en Excel/Word._
+	- **Apache Commons** → _manejo de cadenas, archivos y más._
+	- **Logback** → _logging avanzado._
+
+---
+
+### ✅ Requerimientos Funcionales
+
+| Código | Requerimiento Funcional |
+|--------|--------------------------|
+| RF01   | El sistema debe contar con funcionalidades sobre del cliente |
+| RF02   | El sistema debe contener información relevante del producto |
+| RF03   | El sistema debe contar con funcionalidades sobre los pedidos |
+
+---
+
+### ⚡ Requerimientos No Funcionales
+
+| Código | Requerimiento No Funcional |
+|--------|-----------------------------|
+| RNF01  | El sistema debe contar con buena usabilidad |
+| RNF02  | El sistema debe contener el patrón Modelo-Vista-Controlador |
+| RNF03  | El sistema debe contar contar con accesibilidad y portabilidad. |
+
+
+---
+
+## 📊 Planificación del Proyecto
+- **Jefe de Proyecto:** Nick Preston Ayala Flores  
+- **Fechas del Proyecto:** 20/08/2025 al 27/10/2025  
+- **Costo Estimado:** S/. 2,576.53  
+
+👉 Puedes ver el **diagrama de Gantt** y la **Estructura de Desglose de Trabajo (WBS)** en la documentación del proyecto.  
+>[UNIVERSIDAD TECNOLÓGICA DEL PERÚ.docx](https://utpedupe-my.sharepoint.com/:w:/g/personal/u23259768_utp_edu_pe/ETlrQrL0dRtJqmLq9IB8gZAB79rT4jF4h1UkiV866sjvUQ?e=lwekp6)
+---
+
+## 👨‍💻 Integrantes del Equipo
+- Ayala Flores Nick Preston  
+- Gamonal Campomanes Álvaro Daniel  
+- Marcaquispe Sulca Luis Ángel  
+- Paredes Paredes César Augusto Daniel  
+- Ramos Gutiérrez Yoselin Jenifer  
+
+---
