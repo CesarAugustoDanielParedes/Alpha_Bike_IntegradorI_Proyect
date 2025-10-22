@@ -1,0 +1,338 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #ddd;
+}
+/* --- HEADER --- */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #0a1a2f;
+  color: #fff;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.navbar .logo img {
+  height: 50px;   /* 🔹 controla el alto del logo */
+  width: auto;    /* 🔹 mantiene proporción */
+}
+
+.navbar .menu a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.search input {
+  padding: 5px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn {
+  padding: 5px 10px;
+  border: 1px solid #fff;
+  background: none;
+  cursor: pointer;
+  color: #fff;
+}
+
+.cart {
+  font-size: 18px;
+}
+
+/* Responsive header y footer*/
+@media (max-width: 1024px) {
+  .navbar {
+    flex-wrap: wrap;
+    padding: 10px 15px;
+  }
+
+  .menu {
+    flex: 1 1 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
+  }
+
+  .search {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .actions {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+}
+@media (max-width: 768px) {
+  /* Header con logo arriba y menú debajo */
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo img {
+    max-width: 120px;
+  }
+
+  .menu {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+  }
+
+  .search {
+    width: 90%;
+  }
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .footer-left,
+  .footer-center,
+  .footer-right {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .social-icons {
+    justify-content: center; /* ahora centradas */
+  }
+}
+
+/* --- FOOTER --- */
+.footer {
+  background-color: #0a1a2f;
+  /* azul oscuro */
+  color: #fff;
+  padding: 40px 20px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-logo {
+  width: 190px;
+  margin-bottom: 10px;
+}
+
+.footer-desc {
+  font-size: 0.9rem;
+  margin: 10px 0 20px;
+}
+
+.footer-center h4,
+.footer-right h4 {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+
+.footer-center ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-center ul li {
+  margin-bottom: 10px;
+}
+
+.footer-center ul li a {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.footer-center ul li a:hover {
+  color: #f44336;
+  /* rojo al pasar el mouse */
+}
+
+.social-icons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.social-icons img {
+  width: 28px;
+  height: 28px;
+  filter: brightness(0) invert(1);
+  /* blancos */
+  transition: transform 0.3s;
+}
+
+.social-icons img:hover {
+  transform: scale(1.2);
+}
+
+.footer-bottom {
+  background-color: #000;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 30px;
+  font-size: 0.85rem;
+}
+/* --- BOTÓN WHATSAPP --- */
+.whatsapp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  z-index: 1000;
+}
+
+.whatsapp img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+
+.whatsapp img:hover {
+  transform: scale(1.1);
+}
+
+
+/*css de lo que no es header ni footer*/
+/* Hero */
+.hero-servicios {
+  position: relative;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-servicios .hero-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(50%); /* oscurece la imagen */
+  z-index: 1;
+}
+
+.hero-servicios .hero-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 20px 30px;
+  border-radius: 10px;
+}
+
+
+/* Grid de servicios */
+.servicios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  padding: 60px 20px;
+  background: #f4f6fc;
+  text-align: center;
+}
+.servicio-card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+.servicio-card:hover {
+  transform: translateY(-5px);
+}
+.servicio-card img {
+  width: 275px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
+
+/* Secciones alternadas */
+.detalle-servicio {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  padding: 60px 20px;
+}
+.detalle-servicio .texto {
+  flex: 1 1 400px;
+}
+.detalle-servicio .imagen {
+  flex: 1 1 400px;
+}
+.detalle-servicio.reverse {
+  flex-direction: row-reverse;
+}
+.detalle-servicio img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* CTA */
+.cta {
+  text-align: center;
+  padding: 60px 20px;
+  background: #162447;
+  color: white;
+}
+.cta .btn-cta {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 25px;
+  background: #1f4068;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+.cta .btn-cta:hover {
+  background: #2d61a4;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-servicios {
+    padding: 60px 15px;
+  }
+  .detalle-servicio {
+    flex-direction: column;
+  }
+}

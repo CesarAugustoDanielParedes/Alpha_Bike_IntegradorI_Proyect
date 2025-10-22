@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha Bike - Producto</title>
+    <link rel="stylesheet" href="assets/css/producto.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="navbar">
+        <div class="logo">
+            <img src="assets/media/logoalphabike.png" alt="Logo Alpha Bike">
+        </div>
+
+        <nav class="menu">
+            <a href="inicio.html">Inicio</a>
+            <a href="servicios.html">Servicios</a>
+            <a href="productos.html">Productos</a>
+            <a href="https://wa.me/51912543818">Contacto</a>
+        </nav>
+
+        <div class="search">
+            <input type="text" placeholder="Buscar...">
+            <button>🔍</button>
+        </div>
+
+        <div class="actions">
+            <a href="registrarse.html" class="btn">Registrarse</a>
+            <a href="iniciosesion.html" class="btn">Acceder</a>
+            <div class="cart">
+                🛒 <span id="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main id="detalle-producto">
+        <main class="detalle-container">
+            <div class="detalle-producto">
+                <!-- LADO IZQUIERDO -->
+                <div class="galeria">
+                    <span class="etiqueta-stock">En stock</span>
+                    <!-- 🔹 Miniaturas dinámicas -->
+                    <div class="imagenes-mini" id="miniaturas-referencia">
+                        <!-- Las imágenes se cargarán dinámicamente desde producto.js -->
+                    </div>
+
+                    <!-- Imagen principal -->
+                    <div class="imagen-grande">
+                        <img id="imagen-producto" src="assets/media/default.jpg" alt="Producto principal">
+                    </div>
+                </div>
+
+                <!-- LADO DERECHO -->
+                <div class="info">
+                    <div class="header-info">
+                        <h2 id="nombre-producto">Cargando...</h2>
+                        <img id="logo-marca" src="assets/media/default_logo.png" alt="Marca" class="logo-marca">
+                    </div>
+
+                    <p class="precio">S/ <span id="precio-producto">0.00</span></p>
+
+                    <div class="caracteristicas">
+                        <div class="titulo-seccion">Características Principales</div>
+                        <div class="contenido-caracteristicas">
+                            <p id="descripcion-producto">Cargando descripción...</p>
+                        </div>
+                    </div>
+
+                    <div class="botones">
+                        <button class="btn-capsula">Añadir al carrito</button>
+                        <button class="btn-capsula verde">Comprar por WhatsApp</button>
+                    </div>
+
+                    <div class="promo">Por tu compra llévate la instalación gratuita</div>
+
+                    <div class="entregas">
+                        <div class="titulo-seccion">Métodos de entrega</div>
+                        <div class="opciones">
+                            <div class="opcion">
+                                <img src="assets/media/truck.png" alt="Camión">
+                                <div>
+                                    <h4>Despacho Programado</h4>
+                                    <p>Envíos a todo el Perú. Precios disponibles en el carrito</p>
+                                </div>
+                            </div>
+                            <div class="opcion">
+                                <img src="assets/media/pickup.png" alt="Recojo">
+                                <div>
+                                    <h4>Retiro en Tienda</h4>
+                                    <p>Disponible para recojo en tienda en 24h desde la compra</p>
+                                </div>
+                            </div>
+                            <div class="opcion">
+                                <img src="assets/media/store.png" alt="Tienda">
+                                <div>
+                                    <h4>Compra en Tienda</h4>
+                                    <p>Puedes comprar el producto en Av. A Mz 190 - Los Olivos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- PRODUCTOS RELACIONADOS -->
+        <!-- PRODUCTOS RELACIONADOS -->
+        <section class="relacionados">
+            <h3>Productos Relacionados</h3>
+            <div class="carrusel-container">
+                <button class="carrusel-btn prev" id="btn-prev">❮</button>
+                <div class="carrusel" id="lista-relacionados">
+                    <!-- Cards generadas dinámicamente -->
+                </div>
+                <button class="carrusel-btn next" id="btn-next">❯</button>
+            </div>
+        </section>
+
+    </main>
+
+
+
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- IZQUIERDA -->
+            <div class="footer-left">
+                <img src="assets/media/logoalphabike.png" alt="Alpha Bike Logo" class="footer-logo">
+                <h3>ALPHA BIKE</h3>
+                <p class="footer-desc">Tu tienda de confianza para todas tus necesidades de ciclismo</p>
+                <p>📍 Av. A Mz 190 Los Olivos - Lima - Perú</p>
+                <p>📞 +51 912 543 818</p>
+            </div>
+
+            <!-- CENTRO -->
+            <div class="footer-center">
+                <h4>Productos</h4>
+                <ul>
+                    <li><a href="#">Bicicletas de montaña</a></li>
+                    <li><a href="#">Bicicletas de ruta</a></li>
+                    <li><a href="#">Bicicletas eléctricas</a></li>
+                    <li><a href="#">Accesorios</a></li>
+                </ul>
+            </div>
+
+            <!-- DERECHA -->
+            <div class="footer-right">
+                <h4>Horarios</h4>
+                <p>Lunes - Viernes: 8:00 am - 8:00 pm</p>
+                <p>Sábado: 8:00 am - 8:00 pm</p>
+
+                <h4>Síguenos</h4>
+                <div class="social-icons">
+                    <a href="#"><img src="assets/media/facebook.png" alt="Facebook"></a>
+                    <a href="#"><img src="assets/media/instagram.png" alt="Instagram"></a>
+                    <a href="#"><img src="assets/media/youtube.png" alt="YouTube"></a>
+                    <a href="#"><img src="assets/media/tiktok.png" alt="TikTok"></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEGUNDO FOOTER -->
+        <div class="footer-bottom">
+            <p>© 2025 ALPHA BIKE. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    <!-- BOTÓN WHATSAPP -->
+    <a href="https://wa.me/51912543818" class="whatsapp" target="_blank">
+        <img src="assets/media/wasap.png" alt="WhatsApp">
+    </a>
+
+
+    <script src="assets/js/producto.js"></script>
+</body>
+
+</html>
