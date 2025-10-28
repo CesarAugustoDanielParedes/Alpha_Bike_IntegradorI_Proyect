@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha Bike - Panel de Administrador</title>
+<link rel="stylesheet" href="assets/css/panel.css">
+</head>
+<body>
+   
+    <aside class="sidebar">
+        <div class="logo">
+            <h1>🚴 Alpha Bike</h1>
+            <p>Panel Admin</p>
+        </div>
+        <nav class="nav-menu">
+            <a href="#" class="nav-item active" data-section="dashboard">
+                <span class="icon">📊</span>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="nav-item" data-section="banners">
+                <span class="icon">🖼️</span>
+                <span>Banners</span>
+            </a>
+            <a href="#" class="nav-item" data-section="productos">
+                <span class="icon">🚲</span>
+                <span>Productos</span>
+            </a>
+            <a href="#" class="nav-item" data-section="usuarios">
+                <span class="icon">👥</span>
+                <span>Usuarios</span>
+            </a>
+            <a href="#" class="nav-item" data-section="empleados">
+                <span class="icon">👔</span>
+                <span>Empleados</span>
+            </a>
+            <a href="#" class="nav-item" data-section="pedidos">
+                <span class="icon">📦</span>
+                <span>Pedidos</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="inicio.html" class="btn-website">
+                <span class="icon">🌐</span>
+                <span>Ir a Página Principal</span>
+            </a>
+        </div>
+    </aside>
+
+  
+    <main class="main-content">
+        <header class="header">
+            <h2 id="section-title">Dashboard</h2>
+            <div class="user-info">
+                <span>Admin</span>
+                <div class="avatar">A</div>
+            </div>
+        </header>
+
+       
+        <section id="dashboard" class="content-section active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🚲</div>
+                    <div class="stat-info">
+                        <h3>Productos Activos</h3>
+                        <p class="stat-number" id="total-productos">24</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📦</div>
+                    <div class="stat-info">
+                        <h3>Pedidos Totales</h3>
+                        <p class="stat-number" id="total-pedidos">156</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🚚</div>
+                    <div class="stat-info">
+                        <h3>Pedidos a Entregar</h3>
+                        <p class="stat-number" id="pedidos-pendientes">12</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-info">
+                        <h3>Usuarios Registrados</h3>
+                        <p class="stat-number" id="total-usuarios">89</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section id="banners" class="content-section">
+            <div class="section-header">
+                <h3>Gestión de Banners</h3>
+                <button class="btn-primary" onclick="openModal('addBanner')">
+                    <span>+</span> Agregar Banner
+                </button>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Vista Previa</th>
+                            <th>Nombre</th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="banners-table">
+                        <tr>
+                            <td>1</td>
+                            <td><img src="/placeholder.svg?height=50&width=100" alt="Banner" class="banner-preview"></td>
+                            <td>Banner Promoción Verano</td>
+                            <td>15/12/2024</td>
+                            <td>
+                                <button class="btn-delete" onclick="deleteBanner(1)">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><img src="/placeholder.svg?height=50&width=100" alt="Banner" class="banner-preview"></td>
+                            <td>Banner Descuentos</td>
+                            <td>10/12/2024</td>
+                            <td>
+                                <button class="btn-delete" onclick="deleteBanner(2)">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+       
+        <section id="productos" class="content-section">
+            <div class="section-header">
+                <h3>Gestión de Productos</h3>
+                <button class="btn-primary" onclick="openModal('addProducto')">
+                    <span>+</span> Agregar Producto
+                </button>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productos-table">
+                        <tr>
+                            <td>1</td>
+                            <td><img src="/placeholder.svg?height=50&width=50" alt="Producto" class="product-preview"></td>
+                            <td>Bicicleta Montaña Pro</td>
+                            <td>S/ 1,299.00</td>
+                            <td>15</td>
+                            <td>
+                                <button class="btn-edit" onclick="editProducto(1)">Editar</button>
+                                <button class="btn-discount" onclick="openModal('discount', 1)">Descuento</button>
+                                <button class="btn-delete" onclick="deleteProducto(1)">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><img src="/placeholder.svg?height=50&width=50" alt="Producto" class="product-preview"></td>
+                            <td>Casco Protección XL</td>
+                            <td>S/ 89.00</td>
+                            <td>45</td>
+                            <td>
+                                <button class="btn-edit" onclick="editProducto(2)">Editar</button>
+                                <button class="btn-discount" onclick="openModal('discount', 2)">Descuento</button>
+                                <button class="btn-delete" onclick="deleteProducto(2)">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        
+        <section id="usuarios" class="content-section">
+            <div class="section-header">
+                <h3>Gestión de Usuarios</h3>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Pedidos</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usuarios-table">
+                        <tr>
+                            <td>1</td>
+                            <td>Carlos Mendoza</td>
+                            <td>carlos.m@email.com</td>
+                            <td>5</td>
+                            <td><span class="status-badge online">En línea</span></td>
+                            <td>
+                                <button class="btn-suspend" onclick="suspendUser(1)">Suspender</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>María García</td>
+                            <td>maria.g@email.com</td>
+                            <td>3</td>
+                            <td><span class="status-badge offline">Desconectado</span></td>
+                            <td>
+                                <button class="btn-suspend" onclick="suspendUser(2)">Suspender</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+      
+        <section id="empleados" class="content-section">
+            <div class="section-header">
+                <h3>Gestión de Empleados</h3>
+                <button class="btn-primary" onclick="openModal('addEmpleado')">
+                    <span>+</span> Agregar Empleado
+                </button>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Puesto</th>
+                            <th>Correo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="empleados-table">
+                        <tr>
+                            <td>1</td>
+                            <td>Juan Pérez</td>
+                            <td>Gerente de Ventas</td>
+                            <td>juan.p@alphabike.com</td>
+                            <td>
+                                <button class="btn-delete" onclick="deleteEmpleado(1)">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Ana Torres</td>
+                            <td>Soporte Técnico</td>
+                            <td>ana.t@alphabike.com</td>
+                            <td>
+                                <button class="btn-delete" onclick="deleteEmpleado(2)">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+       
+        <section id="pedidos" class="content-section">
+            <div class="section-header">
+                <h3>Gestión de Pedidos</h3>
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Usuario</th>
+                            <th>Nombre Cliente</th>
+                            <th>Distrito</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pedidos-table">
+                        <tr>
+                            <td>#001</td>
+                            <td>carlos.m@email.com</td>
+                            <td>Carlos Mendoza</td>
+                            <td>Miraflores</td>
+                            <td><span class="status-badge pending">Pendiente</span></td>
+                            <td>20/12/2024</td>
+                        </tr>
+                        <tr>
+                            <td>#002</td>
+                            <td>maria.g@email.com</td>
+                            <td>María García</td>
+                            <td>San Isidro</td>
+                            <td><span class="status-badge delivered">Entregado</span></td>
+                            <td>18/12/2024</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+   
+    <div id="modal-overlay" class="modal-overlay">
+    
+        <div id="addBanner" class="modal">
+            <div class="modal-header">
+                <h3>Agregar Banner</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="bannerForm">
+                    <div class="form-group">
+                        <label>Nombre del Banner</label>
+                        <input type="text" placeholder="Ej: Banner Promoción" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Imagen del Banner</label>
+                        <input type="file" accept="image/*" required>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn-secondary" onclick="closeModal()">Cancelar</button>
+                        <button type="submit" class="btn-primary">Agregar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="addProducto" class="modal">
+            <div class="modal-header">
+                <h3>Agregar Producto</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="productoForm">
+                    <div class="form-group">
+                        <label>Nombre del Producto</label>
+                        <input type="text" placeholder="Ej: Bicicleta Montaña" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Descripción</label>
+                        <textarea placeholder="Descripción del producto" rows="3" required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Precio (S/)</label>
+                            <input type="number" placeholder="0.00" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Stock</label>
+                            <input type="number" placeholder="0" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Imagen del Producto</label>
+                        <input type="file" accept="image/*" required>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn-secondary" onclick="closeModal()">Cancelar</button>
+                        <button type="submit" class="btn-primary">Agregar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        
+        <div id="discount" class="modal modal-small">
+            <div class="modal-header">
+                <h3>Aplicar Descuento</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="discountForm">
+                    <div class="form-group">
+                        <label>Porcentaje de Descuento (%)</label>
+                        <input type="number" placeholder="Ej: 20" min="1" max="100" required>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn-secondary" onclick="closeModal()">Cancelar</button>
+                        <button type="submit" class="btn-primary">Aplicar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        
+        <div id="addEmpleado" class="modal">
+            <div class="modal-header">
+                <h3>Agregar Empleado</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="empleadoForm">
+                    <div class="form-group">
+                        <label>Nombre Completo</label>
+                        <input type="text" placeholder="Ej: Juan Pérez" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Puesto</label>
+                        <select required>
+                            <option value="">Seleccionar puesto</option>
+                            <option value="gerente">Gerente de Ventas</option>
+                            <option value="vendedor">Vendedor</option>
+                            <option value="soporte">Soporte Técnico</option>
+                            <option value="almacen">Encargado de Almacén</option>
+                            <option value="marketing">Marketing</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Correo Electrónico</label>
+                        <input type="email" placeholder="empleado@alphabike.com" required>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn-secondary" onclick="closeModal()">Cancelar</button>
+                        <button type="submit" class="btn-primary">Agregar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/panel.js"></script>
+</body>
+</html>
