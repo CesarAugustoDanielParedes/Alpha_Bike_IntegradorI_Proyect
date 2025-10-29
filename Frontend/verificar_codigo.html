@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Verificar Código - AlphaBike</title>
+<style>
+
+  :root{
+    --navy:#002b5b;
+    --accent:#e60023; 
+    --white:#ffffff;
+    --overlay: rgba(0,0,0,0.45);
+  }
+  body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family: "Poppins", "Segoe UI", Roboto, Arial, sans-serif;
+    background: url('/Frontend/assets/media/fondologin.jpg') center/cover no-repeat #071427;
+    color:var(--navy);
+  }
+
+  .wrap{
+    width:380px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
+    border-radius:14px;
+    box-shadow: 0 10px 30px rgba(2,8,23,0.6);
+    padding:26px;
+    text-align:center;
+    position:relative;
+  }
+
+  h2{ margin:0 0 8px; color:var(--navy); }
+  p.lead{ margin:0 0 18px; color:#444; font-size:0.95rem; }
+
+  .code-input{
+    width:100%;
+    padding:12px 14px;
+    border-radius:10px;
+    border:1px solid #cfd8dc;
+    font-size:1.05rem;
+    text-align:center;
+    letter-spacing:6px;
+    box-sizing:border-box;
+    transition: box-shadow .18s, border-color .18s;
+  }
+  .code-input:focus{
+    outline:none;
+    border-color:var(--navy);
+    box-shadow:0 4px 18px rgba(0,43,91,0.12);
+  }
+
+  .btn{
+    display:block;
+    width:100%;
+    margin-top:14px;
+    padding:12px;
+    background:var(--navy);
+    color:var(--white);
+    border-radius:10px;
+    border:none;
+    cursor:pointer;
+    font-weight:600;
+    transition: transform .12s ease, background .12s;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+
+  .msg {
+    margin-top:12px;
+    min-height:22px;
+    font-size:0.95rem;
+  }
+
+  .msg.success{ color: #1b5e20; } 
+  .msg.error{ color: var(--accent); font-weight:600; }
+
+
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    15% { transform: translateX(-8px); }
+    30% { transform: translateX(8px); }
+    45% { transform: translateX(-6px); }
+    60% { transform: translateX(6px); }
+    75% { transform: translateX(-3px); }
+    100% { transform: translateX(0); }
+  }
+
+  .shake { animation: shake .45s ease; border-color:var(--accent)!important; box-shadow:0 6px 18px rgba(230,6,35,0.12); }
+
+  .small-link { display:inline-block; margin-top:10px; color:var(--navy); text-decoration:none; font-size:0.9rem; }
+  .small-link:hover{ color:var(--accent); text-decoration:underline; }
+
+  .attempts { margin-top:8px; font-size:0.85rem; color:#555; }
+</style>
+</head>
+<body>
+  <div class="wrap" role="main" aria-labelledby="title">
+    <h2 id="title">Verificar Código</h2>
+    <p class="lead">Introduce el código enviado a tu correo</p>
+
+    <form id="form-verificar" autocomplete="off" novalidate>
+      <input id="codigo" class="code-input" type="text" inputmode="numeric" maxlength="6" placeholder="● ● ● ● ● ●" aria-label="Código de verificación" required>
+      <button class="btn" type="submit" id="btn-verificar">Verificar código</button>
+    </form>
+
+    <div class="msg" id="mensaje" aria-live="polite"></div>
+    <div class="attempts" id="intentos" aria-hidden="true"></div>
+
+    <a href="olvidar_contraseña.html" class="small-link">← Volver / Reenviar correo</a>
+  </div>
+
+<script>
+  
+  const CODIGO_CORRECTO = "TokenGenerator.java"; 
+  const MAX_INTENTOS = 3;           
+  let intentos = 0;
+
+  const form = document.getElementById('form-verificar');
+  const input = document.getElementById('codigo');
+  const mensaje = document.getElementById('mensaje');
+  const intentosEl = document.getElementById('intentos');
+
+  function actualizarIntentos(){
+    if(MAX_INTENTOS > 0){
+      const restante = MAX_INTENTOS - intentos;
+      intentosEl.textContent = `Intentos restantes: ${restante}`;
+      intentosEl.setAttribute('aria-hidden', 'false');
+    }
+  }
+
+  function mostrarError(text){
+    mensaje.className = 'msg error';
+    mensaje.textContent = text;
+  }
+  function mostrarOk(text){
+    mensaje.className = 'msg success';
+    mensaje.textContent = text;
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const codigo = input.value.trim();
+
+  
+    if(!/^\d{6}$/.test(codigo)){
+      mostrarError('El còdigo ingresado no es el correcto');
+      
+      input.classList.remove('shake');
+      void input.offsetWidth; 
+      input.classList.add('shake');
+      return;
+    }
+
+    if(codigo === CODIGO_CORRECTO){
+      mostrarOk('✅ Código válido. Redirigiendo...');
+      setTimeout(() => {
+        window.location.href = 'restablecer_contraseña.html';
+      }, 900);
+      return;
+    }
+
+    intentos++;
+    mostrarError('❌ Código incorrecto. Intenta nuevamente.');
+
+    input.classList.remove('shake');
+    void input.offsetWidth;
+    input.classList.add('shake');
+
+
+    if(MAX_INTENTOS > 0){
+      actualizarIntentos();
+      if(intentos >= MAX_INTENTOS){
+        mostrarError('Se superó el número de intentos. Vuelve a solicitar el código.');
+        input.disabled = true;
+        document.getElementById('btn-verificar').disabled = true;
+
+      }
+    }
+  });
+
+
+  input.addEventListener('input', function(){ 
+    mensaje.textContent = '';
+    mensaje.className = 'msg';
+    if(MAX_INTENTOS > 0) actualizarIntentos();
+  });
+
+
+  if(MAX_INTENTOS > 0) actualizarIntentos();
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+

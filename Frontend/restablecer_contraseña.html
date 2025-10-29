@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restablecer Contraseña - AlphaBike</title>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: url('/Frontend/assets/media/fondologin.jpg') no-repeat center center/cover;
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #0b1a33;
+    }
+    .card {
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        padding: 30px 40px;
+        width: 400px;
+        text-align: center;
+    }
+    h2 {
+        color: #002b5b;
+        margin-bottom: 15px;
+    }
+    p {
+        color: #444;
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+    input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        margin-bottom: 15px;
+    }
+    button {
+        width: 100%;
+        background-color: #002b5b;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 15px;
+        transition: 0.3s;
+    }
+    button:hover {
+        background-color: #e60023;
+    }
+    a {
+        display: inline-block;
+        margin-top: 15px;
+        color: #002b5b;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    a:hover {
+        color: #e60023;
+    }
+</style>
+</head>
+<body>
+    <div class="card">
+        <h2>Restablecer Contraseña</h2>
+        <p>Ingresa tu nueva contraseña para continuar.</p>
+        <form id="form-restablecer">
+            <input type="password" id="nueva" placeholder="Nueva contraseña" required>
+            <input type="password" id="confirmar" placeholder="Confirmar contraseña" required>
+            <button type="submit">Actualizar contraseña</button>
+        </form>
+        <a href="iniciosesion.html">⬅️ Volver al inicio de sesión</a>
+    </div>
+
+<script>
+document.getElementById("form-restablecer").addEventListener("submit", function(e){
+    e.preventDefault();
+    let n1 = document.getElementById("nueva").value;
+    let n2 = document.getElementById("confirmar").value;
+    if(n1 === n2){
+        alert("✅ Contraseña actualizada correctamente.");
+        window.location.href = "iniciosesion.html";
+    } else {
+        alert("❌ Las contraseñas no coinciden.");
+    }
+});
+</script>
+<script>
+  document.getElementById("formRestablecer").addEventListener("submit", function(e) {
+    const pass1 = document.getElementById("nuevaPass").value.trim();
+    const pass2 = document.getElementById("confirmarPass").value.trim();
+    const mensaje = document.getElementById("mensaje");
+
+    if (pass1 !== pass2) {
+      e.preventDefault(); 
+      mensaje.textContent = "⚠️ Las contraseñas no coinciden.";
+      mensaje.style.color = "red";
+      mensaje.style.fontWeight = "bold";
+    } else {
+      mensaje.textContent = "✅ Contraseña actualizada correctamente.";
+      mensaje.style.color = "limegreen";
+      mensaje.style.fontWeight = "bold";
+    }
+  });
+</script>
+
+</body>
+</html>
+
+
+
+

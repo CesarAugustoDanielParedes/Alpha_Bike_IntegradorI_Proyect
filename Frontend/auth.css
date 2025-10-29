@@ -1,0 +1,73 @@
+/* ---------- Estilo general ---------- */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #0A1A44, #13275C);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
+h2 {
+  color: #FFFFFF;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #F0F0F0;
+  font-size: 14px;
+  color: #000;
+}
+
+button {
+  background-color: #E50914;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #B2060F;
+}
+
+a {
+  color: #F5F5F5;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+a:hover {
+  color: #E50914;
+}
+
+p {
+  margin-top: 10px;
+}
