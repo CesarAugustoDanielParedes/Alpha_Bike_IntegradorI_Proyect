@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha Bike - Registrarse</title>
+    <link rel="stylesheet" href="assets/css/registrarse.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <img src="assets/media/logoalphabike.png" alt="Logo Alpha Bike">
+        </div>
+
+        <nav class="menu">
+            <a href="inicio.html">Inicio</a>
+            <a href="servicios.html">Servicios</a>
+            <a href="productos.html">Productos</a>
+            <a href="https://wa.me/51912543818">Contacto</a>
+        </nav>
+
+        <div class="search">
+            <input type="text" placeholder="Buscar...">
+            <button>🔍</button>
+        </div>
+
+        <div class="actions">
+            <a href="registrarse.html" class="btn">Registrarse</a>
+            <a href="iniciosesion.html" class="btn">Acceder</a>
+            <div class="cart">
+                <a href="carrito.html" class="cart">
+                    🛒 <span id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="auth-section" style="background-image:url('assets/media/fondologin.jpg')">
+        <div class="auth-overlay"></div>
+        <div class="auth-container">
+            <div class="auth-logo"><img src="assets/media/logoalphabike2.png" alt="Alpha Bike"></div>
+            <h2>Regístrate</h2>
+
+            <form class="auth-form" id="formRegistro">
+                
+                <div class="input-group"><span class="icon">👤</span><input type="text" id="nombre" placeholder="Nombre" required></div>
+                
+                <div class="input-group"><span class="icon">👤</span><input type="text" id="apellido" placeholder="Apellido" required></div>
+                
+                <div class="input-group"><span class="icon">📱</span>
+                    <input type="tel" id="telefono" placeholder="Teléfono (9 dígitos)" 
+                           pattern="[0-9]{9}" 
+                           title="El teléfono debe tener 9 dígitos numéricos" 
+                           required>
+                </div>
+                
+                <div class="input-group"><span class="icon">📧</span><input type="email" id="correo" placeholder="Correo electrónico" required></div>
+                
+                <div class="input-group"><span class="icon">🔑</span><input type="password" id="contrasena" placeholder="Contraseña" required><span class="toggle-pass" onclick="togglePwd('contrasena',this)">👁️</span></div>
+                
+                <button type="submit" class="btn-primary">Crear Cuenta</button>
+            </form>
+
+            <p class="switch-link">¿Ya tienes cuenta? <a href="iniciosesion.html">Ingresa aquí</a></p>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <img src="assets/media/logoalphabike.png" alt="Alpha Bike Logo" class="footer-logo">
+                <h3>ALPHA BIKE</h3>
+                <p class="footer-desc">Tu tienda de confianza para todas tus necesidades de ciclismo</p>
+                <p>📍 Av. A Mz 190 Los Olivos - Lima - Perú</p>
+                <p>📞 +51 912 543 818</p>
+            </div>
+
+            <div class="footer-center">
+                <h4>Productos</h4>
+                <ul>
+                    <li><a href="#">Bicicletas de montaña</a></li>
+                    <li><a href="#">Bicicletas de ruta</a></li>
+                    <li><a href="#">Bicicletas eléctricas</a></li>
+                    <li><a href="#">Accesorios</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-right">
+                <h4>Horarios</h4>
+                <p>Lunes - Viernes: 8:00 am - 8:00 pm</p>
+                <p>Sábado: 8:00 am - 8:00 pm</p>
+
+                <h4>Síguenos</h4>
+                <div class="social-icons">
+                    <a href="#"><img src="assets/media/facebook.png" alt="Facebook"></a>
+                    <a href="#"><img src="assets/media/instagram.png" alt="Instagram"></a>
+                    <a href="#"><img src="assets/media/youtube.png" alt="YouTube"></a>
+                    <a href="#"><img src="assets/media/tiktok.png" alt="TikTok"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 ALPHA BIKE. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    <a href="https://wa.me/51912543818" class="whatsapp" target="_blank">
+        <img src="assets/media/wasap.png" alt="WhatsApp">
+    </a>
+    
+    <script>
+        // Mostrar/ocultar contraseña
+        function togglePwd(id, icon) {
+            const input = document.getElementById(id);
+            input.type = input.type === 'password' ? 'text' : 'password';
+            icon.textContent = input.type === 'password' ? '👁️' : '🙈';
+        }
+
+        // Lógica de Registro
+        window.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('formRegistro');
+            
+            if (!form) return; 
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                // 1. CAPTURAR TODOS LOS CAMPOS
+                const nombre = document.getElementById('nombre').value.trim();
+                const apellido = document.getElementById('apellido').value.trim();
+                const telefono = document.getElementById('telefono').value.trim();
+                const correo = document.getElementById('correo').value.trim();
+                const contrasena = document.getElementById('contrasena').value.trim();
+
+                // 2. Validación básica
+                if (!nombre || !apellido || !telefono || !correo || !contrasena) {
+                    alert('Completa todos los campos obligatorios.');
+                    return;
+                }
+
+                try {
+                    // 3. LLAMADA A LA API
+                    const res = await fetch('http://localhost:3000/api/registro', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ nombre, apellido, telefono, correo, contrasena })
+                    });
+                    
+                    const data = await res.json();
+                    
+                    // 4. Manejar Respuesta
+                    if (res.status === 200) { 
+                        alert(data.mensaje || 'Registro exitoso. ¡Ahora puedes iniciar sesión!');
+                        form.reset();
+                        window.location.href = 'iniciosesion.html';
+                    } else {
+                        alert(data.error || 'Ocurrió un error al registrar. Revisa el correo.');
+                    }
+                } catch (err) {
+                    console.error('Error al conectar con el servidor:', err);
+                    alert('Error al conectar con el servidor. Verifica que tu backend esté corriendo.');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

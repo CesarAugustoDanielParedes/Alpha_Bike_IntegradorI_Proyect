@@ -15,9 +15,30 @@ El sistema web automatizado permitirá:
 - 📊 Generar reportes de ventas y clientes recurrentes.  
 - 📱 Ofrecer una interfaz intuitiva y ***responsive*** que se adapte a dispositivos como móviles, tablets y PCs.  
 ---
+## 🔧 Requisitos Previos
+- Java 21 instalado
+
+- Maven instalado
+
+- MySQL con la base de datos AlphaBikeDB disponible en localhost:1433
+---
+## 🔐 Credenciales
+- **Usuario:** sa
+
+- **Contraseña:** 123456789
+---
 ## 🚀 Instalación y Uso
 *(Se incluirán las instrucciones detalladas para la instalación y configuración del proyecto una vez que se definan las tecnologías de backend y se complete el desarrollo.)*
 
+---
+## 🌐 Endpoints
+- POST /api/registro  { nombre, correo, contrasena }
+- POST /api/login     { correo, contrasena }
+- GET  /api/productos
+
+## 💡 Notas finales de instalación
+- Las contraseñas se guardan con BCrypt.
+- Si tu tabla Usuarios tiene columnas diferentes (nombres distintos), ajusta las queries en UsuarioController.java.
 ---
 
 ## ⚙️ Tecnologías y Requerimientos
@@ -26,7 +47,7 @@ El sistema web automatizado permitirá:
 - **Frontend:**  HTML, CSS, 
 - **Backend:**  JavaScript (__JS__)
 	-  **Arquitectura:** MVC
-	- **Principios de Diseño:** SOLID, DAO, TDD 
+	- **Principios de Diseño:** SOLID, TDD 
 - **Base de datos:** MySql
 - **Herramientas de diseño:** Figma y Balsamiq (prototipos de la interfaz)  
 - **Librerías de Apoyo:**
@@ -41,11 +62,9 @@ El sistema web automatizado permitirá:
 
 | Código | Requerimiento Funcional |
 |--------|--------------------------|
-| RF01   | El sistema debe validar el acceso a los usuarios. |
-| RF02   | El sistema debe permitir visualizar la cantidad de ventas del negocio. |
-| RF03   | El sistema debe permitir la búsqueda de productos por tipo, marca y material. |
-| RF04   | El sistema debe permitir la transacción de venta de un producto. |
-| RF05   | El sistema debe permitir generar un reporte de ventas con las ventas realizadas. |
+| RF01   | El sistema debe contar con funcionalidades sobre del cliente |
+| RF02   | El sistema debe contener información relevante del producto |
+| RF03   | El sistema debe contar con funcionalidades sobre los pedidos |
 
 ---
 
@@ -53,11 +72,10 @@ El sistema web automatizado permitirá:
 
 | Código | Requerimiento No Funcional |
 |--------|-----------------------------|
-| RNF01  | El sistema debe contar con una interfaz intuitiva y fácil de usar. |
-| RNF02  | El sistema debe funcionar en distintos dispositivos. |
-| RNF03  | El sistema no debe tardar más de 5 segundos en la visualización de las búsquedas. |
-| RNF04  | El sistema valida las credenciales del usuario antes de su acceso. |
-| RNF05  | El sistema web utilizará el patrón MVC. |
+| RNF01  | El sistema debe contar con buena usabilidad |
+| RNF02  | El sistema debe contener el patrón Modelo-Vista-Controlador |
+| RNF03  | El sistema debe contar contar con accesibilidad y portabilidad. |
+
 
 ---
 
