@@ -12,9 +12,11 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^3.0.2",
+    "bootstrap": "^5.3.8",
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
+    "jquery": "^3.7.1",
     "mssql": "^11.0.1"
   }
 }
