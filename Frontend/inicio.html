@@ -10,7 +10,6 @@
 
 <body>
 
-  <!-- HEADER -->
   <header class="navbar">
     <div class="logo">
       <img src="assets/media/logoalphabike.png" alt="Logo Alpha Bike">
@@ -29,17 +28,16 @@
     </div>
 
     <div class="actions">
-            <a href="registrarse.html" class="btn">Registrarse</a>
-            <a href="iniciosesion.html" class="btn">Acceder</a>
-            <div class="cart">
-                <a href="carrito.html" class="cart">
-                  🛒 <span id="cart-count">0</span>
-                </a>
-            </div>
-        </div>
+      <a href="registrarse.html" class="btn">Registrarse</a>
+      <a href="iniciosesion.html" class="btn">Acceder</a>
+      <div class="cart">
+        <a href="carrito.html" class="cart">
+          🛒 <span id="cart-count">0</span>
+        </a>
+      </div>
+    </div>
   </header>
 
-  <!-- HERO VIDEO -->
   <section class="hero">
     <video autoplay muted loop class="hero-video">
       <source src="assets/media/videoalphabikehero.mp4" type="video/mp4">
@@ -51,50 +49,19 @@
     </div>
   </section>
 
-  <!-- CARRUSEL -->
   <section class="carousel">
     <button class="carousel-btn left" onclick="moveSlide(-1)">❮</button>
 
-    <div class="carousel-container">
-      <div class="carousel-item">
-        <div class="carousel-text">
-          <h2>Accesorios de calidad</h2>
-          <p>Encuentra cascos, luces, guantes y mucho más para tu bici.</p>
-        </div>
-        <div class="carousel-img">
-          <img src="assets/media/accesorios1.jpg" alt="Accesorios">
-        </div>
-      </div>
-
-      <div class="carousel-item">
-        <div class="carousel-text">
-          <h2>Servicios especializados</h2>
-          <p>Mantenimiento y reparación para todo tipo de bicicletas.</p>
-        </div>
-        <div class="carousel-img">
-          <img src="assets/media/mantenimiento.jpg" alt="Accesorios">
-        </div>
-      </div>
-
-      <div class="carousel-item">
-        <div class="carousel-text">
-          <h2>Visítanos</h2>
-          <p>Nos encontramos en Los Olivos - Av.A Mz 190 - Lima - Perú</p>
-        </div>
-        <div class="carousel-img">
-          <img src="assets/media/entradalocal.jpg" alt="Accesorios">
-        </div>
-      </div>
+    <div class="carousel-container" id="carouselContainer">
+        <p style="text-align: center; color: #666; padding: 50px;">Cargando promociones...</p>
     </div>
 
     <button class="carousel-btn right" onclick="moveSlide(1)">❯</button>
   </section>
 
-  <!-- CATEGORÍAS -->
   <section class="categorias">
     <h2 class="section-title">Categorías de Bicicletas</h2>
     <div class="categorias-container">
-      <!-- Montañera -->
       <div class="categoria-card">
         <img src="assets/media/montañera.png" alt="Bicicleta Montañera">
         <h3>Montañera</h3>
@@ -102,7 +69,6 @@
         <a href="#" class="btn-red ver-mas" data-id="1">Ver más</a>
       </div>
 
-      <!-- Ruta -->
       <div class="categoria-card">
         <img src="assets/media/ruta.png" alt="Bicicleta de Ruta">
         <h3>Ruta</h3>
@@ -110,7 +76,6 @@
         <a href="#" class="btn-red ver-mas" data-id="2">Ver más</a>
       </div>
 
-      <!-- BMX -->
       <div class="categoria-card">
         <img src="assets/media/bmx.png" alt="Bicicleta BMX">
         <h3>BMX</h3>
@@ -120,7 +85,6 @@
     </div>
   </section>
 
-  <!-- MARCAS -->
   <section class="marcas">
     <h2 class="section-title">MARCAS</h2>
     <button class="carousel-btn left" onclick="moveBrand(-1)">❮</button>
@@ -137,30 +101,25 @@
     <button class="carousel-btn right" onclick="moveBrand(1)">❯</button>
   </section>
 
-  <!-- MODAL -->
-<div id="productModal" class="modal" aria-hidden="true">
-  <div class="modal-content">
-    <button class="close">&times;</button>
-
-    <div class="modal-media">
-      <img id="modal-image" src="" alt="Imagen del producto">
-    </div>
-
-    <div class="modal-info">
-      <h3 id="modal-title">Título</h3>
-      <p id="modal-description">Descripción...</p>
-      <div class="modal-row">
-        <div id="modal-price" class="modal-price">S/ 0.00</div>
-        <button class="btn-red" id="buyNowBtn">Comprar ahora</button>
+  <div id="productModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close">&times;</button>
+      <div class="modal-media">
+        <img id="modal-image" src="" alt="Imagen del producto">
+      </div>
+      <div class="modal-info">
+        <h3 id="modal-title">Título</h3>
+        <p id="modal-description">Descripción...</p>
+        <div class="modal-row">
+          <div id="modal-price" class="modal-price">S/ 0.00</div>
+          <button class="btn-red" id="buyNowBtn">Comprar ahora</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-container">
-      <!-- IZQUIERDA -->
       <div class="footer-left">
         <img src="assets/media/logoalphabike.png" alt="Alpha Bike Logo" class="footer-logo">
         <h3>ALPHA BIKE</h3>
@@ -169,7 +128,6 @@
         <p>📞 +51 912 543 818</p>
       </div>
 
-      <!-- CENTRO -->
       <div class="footer-center">
         <h4>Productos</h4>
         <ul>
@@ -180,7 +138,6 @@
         </ul>
       </div>
 
-      <!-- DERECHA -->
       <div class="footer-right">
         <h4>Horarios</h4>
         <p>Lunes - Viernes: 8:00 am - 8:00 pm</p>
@@ -196,15 +153,13 @@
       </div>
     </div>
 
-    <!-- SEGUNDO FOOTER -->
     <div class="footer-bottom">
       <p>© 2025 ALPHA BIKE. Todos los derechos reservados.</p>
     </div>
   </footer>
-  <!-- BOTÓN WHATSAPP -->
-<a href="https://wa.me/51912543818" class="whatsapp" target="_blank">
-  <img src="assets/media/wasap.png" alt="WhatsApp">
-</a>
+  <a href="https://wa.me/51912543818" class="whatsapp" target="_blank">
+    <img src="assets/media/wasap.png" alt="WhatsApp">
+  </a>
 
 
   <script src="assets/js/inicio.js"></script>

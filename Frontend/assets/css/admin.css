@@ -1,0 +1,278 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6; /* Fondo suave */
+}
+
+/* Contenedor principal (Sidebar + Main Content) */
+.panel-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* 1. BARRA LATERAL (SIDEBAR) */
+.sidebar {
+    width: 250px;
+    background-color: #0a1a2f; /* Azul oscuro corporativo */
+    color: #fff;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.logo-admin {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo-admin img {
+    width: 60px;
+    height: auto;
+    filter: brightness(0) invert(1); /* Hace que el logo se vea blanco */
+}
+
+.logo-admin h3 {
+    margin: 10px 0 0;
+    font-weight: bold;
+    color: #f4f7f6;
+}
+
+.sidebar-menu {
+    flex-grow: 1;
+}
+
+.menu-item {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #ccc;
+    transition: background 0.3s, color 0.3s;
+    font-size: 1rem;
+}
+
+.menu-item:hover,
+.menu-item.active {
+    background-color: #003366; /* Azul más claro */
+    color: #fff;
+    border-left: 5px solid #f44336; /* Línea de enfoque (Rojo) */
+    padding-left: 15px;
+}
+
+.sidebar hr {
+    border: none;
+    border-top: 1px solid #1f375a;
+    margin: 10px 20px;
+}
+
+/* Sección de Cerrar Sesión */
+.logout-section {
+    padding: 20px;
+    border-top: 1px solid #1f375a;
+}
+
+.btn-logout {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #f44336; /* Rojo para acción de peligro */
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+    font-weight: bold;
+}
+
+.btn-logout:hover {
+    background-color: #d32f2f;
+}
+
+/* 2. CONTENIDO PRINCIPAL */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.topbar {
+    padding: 15px 30px;
+    background: white;
+    border-bottom: 1px solid #ddd;
+    text-align: right;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.user-info strong {
+    color: #003366;
+}
+
+.content-area {
+    padding: 30px;
+}
+
+.content-area h2 {
+    color: #0a1a2f;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* --- Tablas y Botones de Gestión (Para los módulos) --- */
+
+.content-area table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.content-area th, .content-area td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    font-size: 0.9em;
+}
+
+.content-area th {
+    background-color: #003366;
+    color: white;
+    text-transform: uppercase;
+}
+
+.content-area tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.action-buttons button, #addProductBtn {
+    padding: 8px 12px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background 0.2s;
+}
+
+.btn-edit { background-color: #007bff; color: white; }
+.btn-delete { background-color: #dc3545; color: white; }
+.btn-activate { background-color: #28a745; color: white; }
+.btn-search { background-color: #003366; color: white; }
+
+/* Barra de Búsqueda */
+.search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-bar input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex-grow: 1;
+}
+
+.search-bar button {
+    padding: 10px 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 80px;
+        padding: 10px 0;
+    }
+    .sidebar h3,
+    .sidebar span,
+    .logout-section {
+        display: none;
+    }
+    .menu-item {
+        text-align: center;
+        padding: 15px 5px;
+        font-size: 0.8rem;
+    }
+    .menu-item:hover,
+    .menu-item.active {
+        border-left: none;
+        border-bottom: 3px solid #f44336;
+        padding-left: 5px;
+    }
+    .topbar {
+        text-align: center;
+    }
+    .content-area table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+/* --- Estilos para la tabla de gestión --- */
+.content-area table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.content-area th, .content-area td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    font-size: 0.9em;
+}
+
+.content-area th {
+    background-color: #003366; /* Azul Oscuro */
+    color: white;
+    text-transform: uppercase;
+}
+
+.content-area tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* --- Estilos para Botones de Acción (CRUD) --- */
+.action-buttons button, #addProductBtn {
+    padding: 8px 12px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.btn-edit { background-color: #007bff; color: white; } /* Azul */
+.btn-delete { background-color: #dc3545; color: white; } /* Rojo */
+.btn-activate { background-color: #28a745; color: white; } /* Verde para Agregar/Activar */
+
+/* --- Estilos para el Buscador y Formulario --- */
+.search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.product-form input[type="text"], 
+.product-form input[type="number"],
+.product-form textarea,
+.product-form select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.product-form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}

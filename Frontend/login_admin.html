@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha Bike - Acceso Administrador</title>
+    <link rel="stylesheet" href="assets/css/login_admin.css"> 
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <img src="assets/media/logoalphabike.png" alt="Logo Alpha Bike">
+        </div>
+        <nav class="menu">
+            <a href="inicio.html">Inicio del Sitio Web</a>
+        </nav>
+        <div class="actions">
+            <a href="iniciosesion.html" class="btn">Acceso Cliente</a>
+        </div>
+    </header>
+    
+    <section class="auth-section" style="background-image: url('assets/media/fondologin.jpg');">
+        <div class="auth-overlay"></div>
+        <div class="auth-container">
+            <div class="auth-logo">
+                <img src="assets/media/logoalphabike2.png" alt="Alpha Bike">
+            </div>
+
+            <h2>Acceso Administrador</h2>
+            <p>Ingresa tus credenciales de Alpha Bike Management</p>
+
+            <form class="auth-form" id="formLoginAdmin">
+                
+                <div class="input-group">
+                    <span class="icon">📧</span>
+                    <input type="email" id="correoAdmin" placeholder="Correo de Administrador" required>
+                </div>
+
+                <div class="input-group">
+                    <span class="icon">🔑</span>
+                    <input type="password" placeholder="Contraseña" id="contrasenaAdmin" required>
+                    <span class="toggle-pass" onclick="togglePassword('contrasenaAdmin', this)">👁️</span>
+                </div>
+
+                <button type="submit" class="btn-primary">Ingresar al Panel</button>
+                
+                <a href="#" class="forgot-link">¿Olvidaste la contraseña de Administrador?</a>
+            </form>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>© 2025 ALPHA BIKE Management.</p>
+        </div>
+    </footer>
+    
+    <script src="assets/js/login_admin.js"></script>
+</body>
+
+</html>
