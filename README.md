@@ -20,12 +20,12 @@ El sistema web automatizado permitirá:
 
 - Maven instalado
 
-- MySQL con la base de datos AlphaBikeDB disponible en localhost:1433
+- SQL Server con la base de datos AlphaBikeDB disponible en localhost:1433
 ---
-## 🔐 Credenciales
-- **Usuario:** sa
+## 🔐 Credenciales del panel admin 
+- **Usuario:** admin@alphabike.com
 
-- **Contraseña:** 123456789
+- **Contraseña:** admin12345
 ---
 ## 🚀 Instalación y Uso
 *(Se incluirán las instrucciones detalladas para la instalación y configuración del proyecto una vez que se definan las tecnologías de backend y se complete el desarrollo.)*
@@ -47,8 +47,8 @@ El sistema web automatizado permitirá:
 - **Frontend:**  HTML, CSS, 
 - **Backend:**  JavaScript (__JS__)
 	-  **Arquitectura:** MVC
-	- **Principios de Diseño:** SOLID, TDD 
-- **Base de datos:** MySql
+	- **Principios de Diseño:** DAO, TDD 
+- **Base de datos:** SQL Server
 - **Herramientas de diseño:** Figma y Balsamiq (prototipos de la interfaz)  
 - **Librerías de Apoyo:**
 	- **Google Guava** → _utilidades para colecciones, caching, etc._
