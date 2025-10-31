@@ -1,33 +1,70 @@
+// server.js
 const express = require('express');
-const cors = require('express');
-const { conectar, sql } = require('./db');
+const cors = require('cors'); 
+const path = require('path'); 
+
+// *************************************************************
+// 1. IMPORTAR RUTAS MODULARES 
+// *************************************************************
+// Rutas de Autenticación
+const authRoutes = require('./routes/auth.routes.js'); 
+
+// Rutas Públicas (Catálogo, Banners, Marcas, Categorías)
+const publicRoutes = require('./routes/public.routes.js'); 
+
+// Rutas Protegidas de Administración
+const adminRoutes = require('./routes/adminroutes.js'); 
+const productoRoutes = require('./routes/producto.routes.js'); 
+const pedidoRoutes = require('./routes/pedido.routes.js'); 
+const bannerRoutes = require('./routes/banner.routes.js'); 
+const clienteRoutes = require('./routes/cliente.routes.js'); 
+const marcaRoutes = require('./routes/marca.routes.js'); 
+const categoriaRoutes = require('./routes/categoria.routes.js'); 
+
 
 const app = express();
-app.use(cors());
-app.use(express.json());
 
-// Ruta registro
-app.post('/api/registro', async (req, res) => {
-  const { nombre, correo, contrasena } = req.body;
+// Middlewares Globales
+app.use(cors()); 
+app.use(express.json()); // Permite a Express leer el cuerpo de las solicitudes JSON
 
-  try {
-    const pool = await conectar();
-    await pool.request()
-      .input('nombre', sql.NVarChar, nombre)
-      .input('correo', sql.NVarChar, correo)
-      .input('contrasena', sql.NVarChar, contrasena)
-      .query('INSERT INTO Usuarios (NombreCompleto, Correo, Contrasena) VALUES (@nombre, @correo, @contrasena)');
-    res.json({ mensaje: 'Usuario registrado' });
-  } catch (err) {
-    console.error('🔥 ERROR:', err);
-    res.status(500).json({ error: err.message });
-  }
+
+// *************************************************************
+// 2. CONFIGURACIÓN PARA SERVIR EL FRONTEND (Archivos Estáticos)
+// *************************************************************
+const frontendPath = path.join(__dirname, '..', 'Frontend'); 
+
+app.use(express.static(frontendPath));
+
+// Ruta raíz: Carga el inicio.html
+app.get('/', (req, res) => {
+    res.sendFile(path.join(frontendPath, 'inicio.html')); 
 });
+// *************************************************************
 
-app.get('/api/productos', async (req, res) => {
-  const pool = await conectar();
-  const result = await pool.request().query('SELECT * FROM Productos');
-  res.json(result.recordset);
-});
 
-app.listen(3000, () => console.log('Servidor en http://localhost:3000'))
+// *************************************************************
+// 3. MONTAJE DE RUTAS API MODULARES
+// *************************************************************
+
+// A) Rutas Públicas (NO PROTEGIDAS)
+// Monta: /api/registro, /api/login, /api/productos, /api/banners, /api/marcas, /api/categorias
+app.use('/api', authRoutes); 
+app.use('/api', publicRoutes); 
+
+
+// B) Rutas de ADMINISTRACIÓN (PROTEGIDAS por JWT)
+// Todas las rutas de CRUD y gestión para el panel.
+// ----------------------------------------------------
+app.use('/api/admin', adminRoutes); 
+app.use('/api/admin/productos', productoRoutes); 
+app.use('/api/admin/pedidos', pedidoRoutes); 
+app.use('/api/admin/banners', bannerRoutes); 
+app.use('/api/admin/clientes', clienteRoutes); 
+app.use('/api/admin/marcas', marcaRoutes); 
+app.use('/api/admin/categorias', categoriaRoutes); 
+// *************************************************************
+
+
+// 4. Inicialización del Servidor
+app.listen(3000, () => console.log('Servidor AlphaBike corriendo en http://localhost:3000'));

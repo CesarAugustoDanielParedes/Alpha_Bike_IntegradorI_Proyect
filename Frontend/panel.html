@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaBike | Panel de Administrador</title>
+    <link rel="stylesheet" href="assets/css/admin.css"> 
+</head>
+
+<body>
+    
+    <div class="panel-container">
+        <aside class="sidebar">
+            <div class="logo-admin">
+                <img src="../assets/media/logoalphabike2.png" alt="AlphaBike Admin Logo">
+                <h3>Management</h3>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <a href="#dashboard" class="menu-item active" data-module="dashboard">🏠 Dashboard</a>
+                <hr> 
+                
+                <a href="#productos" class="menu-item" data-module="productos">📦 Productos</a>
+                <a href="#pedidos" class="menu-item" data-module="pedidos">📜 Pedidos</a>
+                <a href="#clientes" class="menu-item" data-module="clientes">👥 Clientes</a>
+                <a href="#banners" class="menu-item" data-module="banners">🖼️ Banners</a>
+                <hr>
+                <a href="#marcas" class="menu-item" data-module="marcas">🏷️ Marcas</a>
+                <a href="#categorias" class="menu-item" data-module="categorias">📂 Categorías</a>
+            </nav>
+            
+            <div class="logout-section">
+                <a href="login_admin.html" id="logoutBtn" class="btn-logout">🔑 Cerrar Sesión</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="user-info">
+                    <span>Bienvenido, </span>
+                    <strong id="adminNameDisplay">Administrador</strong>
+                </div>
+            </header>
+            
+            <div class="content-area" id="contentArea">
+                <h2>Dashboard Principal</h2>
+                <p>Usa el menú lateral para gestionar la tienda AlphaBike. Solo los productos con STOCK > 0 y ACTIVOS se mostrarán al cliente.</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/js/admin.js"></script>
+</body>
+</html>
