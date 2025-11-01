@@ -862,70 +862,309 @@ body {
 
 
 
-/* --- Modal VISA personalizado --- */
-.visa-style {
-    max-width: 380px;
-    background: linear-gradient(160deg, #f8f9fa 0%, #ffffff 100%);
-    border-top: 4px solid #1a73e8;
-    position: relative;
-}
-
-.card-preview {
-    background: linear-gradient(135deg, #0044cc, #007bff);
-    color: white;
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.card-logo {
-    width: 60px;
-    display: block;
-    margin-left: auto;
-    margin-bottom: 1rem;
-}
-
-.card-preview input {
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: white;
-    font-size: 1rem;
+/* 🔹 Modal Visa - versión final profesional */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    inset: 0;
     width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 0.8rem;
-    border-radius: 6px;
-    outline: none;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+    overflow: auto;
 }
 
-.card-preview input::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.card-row {
-    display: flex;
-    gap: 0.8rem;
-}
-
-.card-preview input:focus {
-    background: rgba(255, 255, 255, 0.3);
-}
-
-/* Botones dentro del modal */
-.modal-content .btn-pagar,
-.modal-content .btn-cerrar {
-    width: 100%;
-    margin-top: 0.5rem;
+.modal-content.visa-style {
+    background: #fff;
+    color: #111;
+    margin: 4% auto;
+    padding: 2.5rem;
+    border-radius: 22px;
+    width: 700px;
+    max-width: 95%;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.25);
+    font-family: "Poppins", sans-serif;
+    animation: fadeIn 0.3s ease;
 }
 
 @keyframes fadeIn {
     from {
+        transform: translateY(-20px);
         opacity: 0;
-        transform: scale(0.95);
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content.visa-style h2 {
+    text-align: center;
+    color: #2e2e2e;
+    font-size: 1.9rem;
+    margin-bottom: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* 🔸 Tarjeta visual */
+.card-visual {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.card-front {
+    width: 360px;
+    height: 210px;
+    border-radius: 18px;
+    padding: 20px;
+    color: #fff;
+    position: relative;
+    background: linear-gradient(135deg, #2b2b2b, #4a4a4a);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+}
+
+.card-front:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Logo */
+.card-logo-wrap {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+}
+
+.card-brand {
+    width: 60px;
+    opacity: 0.95;
+}
+
+/* Datos de tarjeta */
+.card-number-display {
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-top: 46px;
+}
+
+.card-row.small {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 22px;
+}
+
+.card-name-display {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    opacity: 0.95;
+}
+
+.card-expiry-display {
+    font-size: 0.9rem;
+    opacity: 0.95;
+}
+
+/* 🔹 Inputs */
+.input-label {
+    display: block;
+    margin-top: 12px;
+    font-weight: 600;
+    color: #222;
+}
+
+#numeroTarjeta {
+    font-size: 1rem;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+    transition: border 0.3s ease;
+}
+
+#numeroTarjeta:focus {
+    border-color: #283e51;
+    outline: none;
+}
+
+.card-hint {
+    font-size: 0.9rem;
+    margin-top: 6px;
+    color: #555;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Marca válida/ inválida */
+.luhn-valid {
+    color: #2ecc71;
+    font-weight: 600;
+}
+.luhn-invalid {
+    color: #e74c3c;
+    font-weight: 600;
+}
+
+/* 🔹 Botones */
+.btn-pagar,
+.btn-cerrar {
+    display: inline-block;
+    width: 48%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    text-align: center;
+    border: none;
+}
+
+.btn-pagar {
+    background-color: #283e51;
+    color: white;
+}
+
+.btn-pagar:hover {
+    background-color: #1c2833;
+}
+
+.btn-cerrar {
+    background-color: #ccc;
+    color: #333;
+}
+
+.btn-cerrar:hover {
+    background-color: #999;
+    color: #fff;
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+    .modal-content.visa-style {
+        width: 90%;
+        padding: 1.8rem;
     }
 
-    to {
-        opacity: 1;
-        transform: scale(1);
+    .card-front {
+        width: 100%;
+        height: 180px;
     }
+}
+
+
+/* Tarjeta visual */
+.card-visual {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.card-front {
+    width: 320px;
+    height: 180px;
+    border-radius: 12px;
+    padding: 16px;
+    color: #fff;
+    position: relative;
+    background: linear-gradient(135deg, #2b2b2b, #4a4a4a);
+    box-shadow: 0 8px 30px rgba(2, 22, 70, 0.35);
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.card-logo-wrap {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+}
+
+.card-brand {
+    width: 56px;
+    opacity: 0.95;
+}
+
+.card-number-display {
+    font-size: 1.15rem;
+    letter-spacing: 2px;
+    margin-top: 46px;
+    text-transform: none;
+}
+
+.card-row.small {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 22px;
+}
+
+.card-name-display {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    opacity: 0.95;
+}
+
+.card-expiry-display {
+    font-size: 0.9rem;
+    opacity: 0.95;
+}
+
+/* input & hint */
+.input-label {
+    display: block;
+    margin-top: 10px;
+    font-weight: 600;
+    color: #222;
+}
+
+#numeroTarjeta {
+    font-size: 1rem;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.card-hint {
+    font-size: 0.9rem;
+    margin-top: 6px;
+    color: #555;
+}
+
+/* marca válida/ inválida */
+.luhn-valid {
+    color: #2ecc71;
+    font-weight: 600;
+}
+
+.luhn-invalid {
+    color: #e74c3c;
+    font-weight: 600;
+}
+
+.card-placeholder {
+    color: #aaa;
+    letter-spacing: 2px;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+/* 🔝 Prioridades de visualización */
+.modal {
+  z-index: 2000; /* ventana de pago */
+}
+
+#confirmOverlay {
+  z-index: 3001; /* confirmación de compra */
+}
+
+.swal2-container {
+  z-index: 4000 !important; /* alerta SweetAlert siempre encima */
 }
