@@ -85,17 +85,23 @@ async function fetchCategorias() {
 // 3. MÓDULO PRODUCTOS (CRUD y BÚSQUEDA)
 // ----------------------------------------------------
 
+// assets/js/admin.js (Función buildProductosTable)
+
 function buildProductosTable(productos) {
     let html = '<table border="1"><thead><tr><th>ID</th><th>Nombre</th><th>Marca</th><th>Precio</th><th>Stock</th><th>Activo</th><th>Acciones</th></tr></thead><tbody>';
     
     productos.forEach(p => {
         const activoText = p.Activo ? '✅ Sí' : '❌ No';
+        
+        // 🚨 CORRECCIÓN CLAVE: CONVERTIR p.Precio a flotante antes de usar toFixed()
+        const precioFormateado = parseFloat(p.Precio).toFixed(2); 
+
         html += `
             <tr data-product-id="${p.ProductoID}">
                 <td>${p.ProductoID}</td>
                 <td>${p.Nombre} (${p.SKU})</td>
                 <td>${p.MarcaNombre}</td>
-                <td>S/ ${p.Precio.toFixed(2)}</td>
+                <td>S/ ${precioFormateado}</td> 
                 <td>${p.Stock}</td>
                 <td>${activoText}</td>
                 <td class="action-buttons">
@@ -109,6 +115,7 @@ function buildProductosTable(productos) {
     html += '</tbody></table>';
     return html;
 }
+
 
 async function loadProductosModule(searchTerm = '') {
     const contentArea = document.getElementById('contentArea');
