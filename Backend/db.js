@@ -7,6 +7,7 @@ const config = {
     host: 'localhost',
     user: 'root',
     password: '12345', // <-- ¡REEMPLAZA ESTO CON TU CONTRASEÑA REAL DE MYSQL!
+    password: '', // <-- ¡REEMPLAZA ESTO CON TU CONTRASEÑA REAL DE MYSQL!
     database: 'AlphaBikeDB', // NOMBRE DE LA BASE DE DATOS
     waitForConnections: true,
     connectionLimit: 10,
