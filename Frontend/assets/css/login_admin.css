@@ -7,31 +7,26 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
 }
-
 /* --- HEADER --- */
 .navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #0a1a2f;
-    /* Azul oscuro */
+    background: #0a1a2f; /* Azul oscuro */
     color: #fff;
     padding: 10px 20px;
     border-bottom: 1px solid #ddd;
 }
-
 .navbar .logo img {
-    height: 50px;
-    width: auto;
+    height: 50px; 
+    width: auto; 
 }
-
 /* Ajuste para que el login admin sea más simple */
 .navbar .menu a {
     margin: 0 10px;
     text-decoration: none;
     color: #fff;
 }
-
 .actions .btn {
     padding: 5px 10px;
     border: 1px solid #fff;
@@ -50,17 +45,11 @@ body {
     justify-content: center;
     align-items: center;
 }
-
 .auth-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    /* Ligeramente más oscuro para énfasis */
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.7); /* Ligeramente más oscuro para énfasis */
 }
-
 .auth-container {
     position: relative;
     background: #fff;
@@ -71,17 +60,14 @@ body {
     text-align: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
-
 .auth-logo img {
     width: 80px;
     margin-bottom: 10px;
 }
-
 h2 {
     margin-bottom: 10px;
     color: #0a1a2f;
 }
-
 .input-group {
     display: flex;
     align-items: center;
@@ -91,28 +77,23 @@ h2 {
     padding: 5px 10px;
     background: #f9f9f9;
 }
-
 .input-group .icon {
     margin-right: 10px;
     color: #003366;
 }
-
 .input-group input {
     flex: 1;
     border: none;
     outline: none;
     background: transparent;
 }
-
 .toggle-pass {
     cursor: pointer;
     color: #555;
 }
-
 .btn-primary {
     width: 100%;
-    background: #003366;
-    /* Azul corporativo */
+    background: #003366; /* Azul corporativo */
     color: white;
     padding: 10px;
     border: none;
@@ -121,23 +102,19 @@ h2 {
     margin: 10px 0;
     transition: background 0.3s;
 }
-
 .btn-primary:hover {
     background: #0a1a2f;
 }
-
 .forgot-link {
     display: block;
     font-size: 0.9rem;
     color: #003366;
     margin-top: 5px;
 }
-
 p {
     font-size: 0.9rem;
     color: #555;
 }
-
 /* Pie de página simple para el login admin */
 .footer-bottom {
     background-color: #000;
@@ -153,17 +130,14 @@ p {
         width: 90%;
         padding: 20px;
     }
-
     .navbar {
         flex-direction: column;
         align-items: center;
     }
-
     .actions {
         margin-top: 10px;
     }
 }
-
 
 /* Navbar Buttons */
 .navbar .btn {

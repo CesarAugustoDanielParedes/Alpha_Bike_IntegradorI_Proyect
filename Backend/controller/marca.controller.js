@@ -1,19 +1,18 @@
-// Backend/controllers/marca.controller.js
-const { conectar, sql } = require('../db'); 
+
+// Backend/controllers/marca.controller.js (MIGRADO A MYSQL)
+const pool = require('../db');
 
 const MarcaController = {};
 
-// 1. Obtener Marcas (READ - Para el Panel de Admin)
+// 1. Obtener Marcas (READ)
 MarcaController.obtenerTodas = async (req, res) => {
     try {
-        const pool = await conectar();
-        // Incluimos LogoURL si fuera necesario
-        const result = await pool.request().query(`
+        const [rows] = await pool.query(`
             SELECT MarcaID, Nombre, LogoURL 
             FROM Marcas 
             ORDER BY Nombre ASC
         `);
-        res.json(result.recordset);
+        res.json(rows);
     } catch (err) {
         console.error('Error al obtener Marcas:', err);
         res.status(500).json({ error: 'Error del servidor al listar marcas.' });
@@ -29,18 +28,12 @@ MarcaController.crearMarca = async (req, res) => {
     }
 
     try {
-        const pool = await conectar();
-        await pool.request()
-            .input('nombre', sql.VarChar, nombre)
-            .input('logoUrl', sql.VarChar, logoUrl || null)
-            .query(`
-                INSERT INTO Marcas (Nombre, LogoURL)
-                VALUES (@nombre, @logoUrl)
-            `);
-
+        const query = 'INSERT INTO Marcas (Nombre, LogoURL) VALUES (?, ?)';
+        const values = [nombre, logoUrl || null];
+        await pool.query(query, values);
         res.status(201).json({ mensaje: 'Marca creada exitosamente.' });
     } catch (err) {
-        if (err.message && err.message.includes('UNIQUE KEY')) {
+        if (err.code === 'ER_DUP_ENTRY') {
             return res.status(409).json({ error: 'Esa marca ya existe.' });
         }
         console.error('Error al crear marca:', err);
@@ -51,33 +44,24 @@ MarcaController.crearMarca = async (req, res) => {
 // 3. Actualizar Marca (UPDATE)
 MarcaController.actualizarMarca = async (req, res) => {
     const marcaId = req.params.id;
-    const { nombre, logoUrl } = req.body; 
+    const { nombre, logoUrl } = req.body;
 
     if (!nombre) {
         return res.status(400).json({ error: 'El nombre de la marca es obligatorio.' });
     }
 
     try {
-        const pool = await conectar();
-        const result = await pool.request()
-            .input('marcaId', sql.Int, marcaId)
-            .input('nombre', sql.VarChar, nombre)
-            .input('logoUrl', sql.VarChar, logoUrl || null)
-            .query(`
-                UPDATE Marcas SET 
-                    Nombre = @nombre, 
-                    LogoURL = @logoUrl
-                WHERE MarcaID = @marcaId
-            `);
+        const query = 'UPDATE Marcas SET Nombre = ?, LogoURL = ? WHERE MarcaID = ?';
+        const values = [nombre, logoUrl || null, marcaId];
+        const [result] = await pool.query(query, values);
 
-        if (result.rowsAffected[0] === 0) {
+        if (result.affectedRows === 0) {
             return res.status(404).json({ error: 'Marca no encontrada para actualizar.' });
         }
 
         res.json({ mensaje: 'Marca actualizada exitosamente.' });
-
     } catch (err) {
-        if (err.message && err.message.includes('UNIQUE KEY')) {
+        if (err.code === 'ER_DUP_ENTRY') {
             return res.status(409).json({ error: 'El nuevo nombre de marca ya existe.' });
         }
         console.error('Error al actualizar marca:', err);
@@ -90,20 +74,15 @@ MarcaController.eliminarMarca = async (req, res) => {
     const marcaId = req.params.id;
 
     try {
-        const pool = await conectar();
-        const result = await pool.request()
-            .input('marcaId', sql.Int, marcaId)
-            .query(`DELETE FROM Marcas WHERE MarcaID = @marcaId`);
+        const [result] = await pool.query('DELETE FROM Marcas WHERE MarcaID = ?', [marcaId]);
 
-        if (result.rowsAffected[0] === 0) {
+        if (result.affectedRows === 0) {
             return res.status(404).json({ error: 'Marca no encontrada para eliminar.' });
         }
 
         res.json({ mensaje: 'Marca eliminada exitosamente.' });
-
     } catch (err) {
-        // Manejar el error de FK (si la marca está en Productos)
-        if (err.message && err.message.includes('FOREIGN KEY constraint')) {
+        if (err.code === 'ER_ROW_IS_REFERENCED_2') {
             return res.status(409).json({ error: 'No se puede eliminar. Esta marca está siendo usada por uno o más productos.' });
         }
         console.error('Error al eliminar marca:', err);

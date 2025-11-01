@@ -1,19 +1,18 @@
-// Backend/controllers/categoria.controller.js
-const { conectar, sql } = require('../db'); 
+
+// Backend/controllers/categoria.controller.js (MIGRADO A MYSQL)
+const pool = require('../db');
 
 const CategoriaController = {};
 
-// 1. Obtener Categorías (READ - Para el Panel de Admin)
+// 1. Obtener Categorías (READ)
 CategoriaController.obtenerTodas = async (req, res) => {
     try {
-        const pool = await conectar();
-        // Solo necesitamos el ID y el Nombre para gestión
-        const result = await pool.request().query(`
+        const [rows] = await pool.query(`
             SELECT CategoriaID, Nombre, Descripcion 
             FROM Categorias 
             ORDER BY Nombre ASC
         `);
-        res.json(result.recordset);
+        res.json(rows);
     } catch (err) {
         console.error('Error al obtener Categorías:', err);
         res.status(500).json({ error: 'Error del servidor al listar categorías.' });
@@ -29,18 +28,12 @@ CategoriaController.crearCategoria = async (req, res) => {
     }
 
     try {
-        const pool = await conectar();
-        await pool.request()
-            .input('nombre', sql.VarChar, nombre)
-            .input('descripcion', sql.VarChar, descripcion || null)
-            .query(`
-                INSERT INTO Categorias (Nombre, Descripcion)
-                VALUES (@nombre, @descripcion)
-            `);
-
+        const query = 'INSERT INTO Categorias (Nombre, Descripcion) VALUES (?, ?)';
+        const values = [nombre, descripcion || null];
+        await pool.query(query, values);
         res.status(201).json({ mensaje: 'Categoría creada exitosamente.' });
     } catch (err) {
-        if (err.message && err.message.includes('UNIQUE KEY')) {
+        if (err.code === 'ER_DUP_ENTRY') {
             return res.status(409).json({ error: 'Esa categoría ya existe.' });
         }
         console.error('Error al crear categoría:', err);
@@ -51,33 +44,24 @@ CategoriaController.crearCategoria = async (req, res) => {
 // 3. Actualizar Categoría (UPDATE)
 CategoriaController.actualizarCategoria = async (req, res) => {
     const categoriaId = req.params.id;
-    const { nombre, descripcion } = req.body; 
+    const { nombre, descripcion } = req.body;
 
     if (!nombre) {
         return res.status(400).json({ error: 'El nombre de la categoría es obligatorio.' });
     }
 
     try {
-        const pool = await conectar();
-        const result = await pool.request()
-            .input('categoriaId', sql.Int, categoriaId)
-            .input('nombre', sql.VarChar, nombre)
-            .input('descripcion', sql.VarChar, descripcion || null)
-            .query(`
-                UPDATE Categorias SET 
-                    Nombre = @nombre, 
-                    Descripcion = @descripcion
-                WHERE CategoriaID = @categoriaId
-            `);
+        const query = 'UPDATE Categorias SET Nombre = ?, Descripcion = ? WHERE CategoriaID = ?';
+        const values = [nombre, descripcion || null, categoriaId];
+        const [result] = await pool.query(query, values);
 
-        if (result.rowsAffected[0] === 0) {
+        if (result.affectedRows === 0) {
             return res.status(404).json({ error: 'Categoría no encontrada para actualizar.' });
         }
 
         res.json({ mensaje: 'Categoría actualizada exitosamente.' });
-
     } catch (err) {
-        if (err.message && err.message.includes('UNIQUE KEY')) {
+        if (err.code === 'ER_DUP_ENTRY') {
             return res.status(409).json({ error: 'El nuevo nombre de categoría ya existe.' });
         }
         console.error('Error al actualizar categoría:', err);
@@ -90,20 +74,15 @@ CategoriaController.eliminarCategoria = async (req, res) => {
     const categoriaId = req.params.id;
 
     try {
-        const pool = await conectar();
-        const result = await pool.request()
-            .input('categoriaId', sql.Int, categoriaId)
-            .query(`DELETE FROM Categorias WHERE CategoriaID = @categoriaId`);
+        const [result] = await pool.query('DELETE FROM Categorias WHERE CategoriaID = ?', [categoriaId]);
 
-        if (result.rowsAffected[0] === 0) {
+        if (result.affectedRows === 0) {
             return res.status(404).json({ error: 'Categoría no encontrada para eliminar.' });
         }
 
         res.json({ mensaje: 'Categoría eliminada exitosamente.' });
-
     } catch (err) {
-        // Manejar el error de FK (si la categoría está en Productos)
-        if (err.message && err.message.includes('FOREIGN KEY constraint')) {
+        if (err.code === 'ER_ROW_IS_REFERENCED_2') {
             return res.status(409).json({ error: 'No se puede eliminar. Esta categoría está siendo usada por uno o más productos.' });
         }
         console.error('Error al eliminar categoría:', err);

@@ -140,10 +140,49 @@ async function loadProductosModule(searchTerm = '') {
             headers: { 'Authorization': `Bearer ${token}` }
         });
 
-        if (res.status === 401 || res.status === 403) throw new Error('Sesión expirada o permisos insuficientes.');
+                if (res.status === 401 || res.status === 403) throw new Error('Sesión expirada o permisos insuficientes.');
         
-        const productos = await res.json();
-        const tableContainer = document.getElementById('productosTableContainer');
+                // ¡CORRECCIÓN! Verificar si la respuesta es exitosa (ej: 200 OK)
+                if (!res.ok) {
+                    // Si el servidor responde con un error (ej: 500), lanzamos un error para que lo capture el bloque CATCH
+                    throw new Error(`Error del servidor: ${res.status} ${res.statusText}`);
+                }
+        
+                                const data = await res.json();
+        
+                        
+        
+                                // DEBUG: Mostrar en consola qué estamos recibiendo exactamente
+        
+                                console.log('Respuesta del servidor para productos:', data);
+        
+                        
+        
+                                // DEFENSA: Asegurarse de que 'productos' sea un array.
+        
+                                // A veces la API puede devolver { "products": [...] } o { "data": [...] }
+        
+                                let productos = [];
+        
+                                if (Array.isArray(data)) {
+        
+                                    productos = data;
+        
+                                } else if (data && Array.isArray(data.products)) {
+        
+                                    productos = data.products;
+        
+                                } else if (data && Array.isArray(data.data)) {
+        
+                                    productos = data.data;
+        
+                                }
+        
+                        
+        
+                
+        
+                        const tableContainer = document.getElementById('productosTableContainer');
 
         if (productos.length === 0 && !searchTerm) {
             tableContainer.innerHTML = '<p>No hay productos registrados. Agrega uno nuevo.</p>';
@@ -435,6 +474,12 @@ async function loadClientesModule(searchTerm = '') {
         const res = await fetch(url, { headers: { 'Authorization': `Bearer ${token}` } });
         
         if (res.status === 401 || res.status === 403) throw new Error('Sesión expirada o permisos insuficientes.');
+
+        // ¡CORRECCIÓN! Verificar si la respuesta es exitosa (ej: 200 OK)
+        if (!res.ok) {
+            // Si el servidor responde con un error (ej: 500), lanzamos un error para que lo capture el bloque CATCH
+            throw new Error(`Error del servidor: ${res.status} ${res.statusText}`);
+        }
 
         const clientes = await res.json();
         document.getElementById('clientesTableContainer').innerHTML = buildClientesTable(clientes);
