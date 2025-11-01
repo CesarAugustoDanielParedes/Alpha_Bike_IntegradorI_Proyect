@@ -24,9 +24,9 @@
 
         <div class="actions">
             <a href="carrito.html" class="cart">🛒 <span id="cart-count">0</span></a>
-    
-      <a href="registrarse.html" class="btn">Registrarse</a>
-      <a href="iniciosesion.html" class="btn">Acceder</a>
+
+            <a href="registrarse.html" class="btn">Registrarse</a>
+            <a href="iniciosesion.html" class="btn">Acceder</a>
         </div>
     </header>
 
@@ -34,6 +34,8 @@
     <main class="carrito-page" style="padding:40px; max-width:900px; margin:auto;">
         <h1>🛒 Tu Carrito</h1>
         <p>Aquí verás los productos que has agregado.</p>
+
+
 
         <!-- Lista de productos -->
         <div id="cart-items" style="margin-top:20px;">
@@ -45,9 +47,24 @@
             Total: S/ 0.00
         </div>
 
+        <!-- 🔹 Métodos de Pago -->
+        <h1>Metodos de Pago</h1>
+        <div id="metodosPago" class="metodos-container">
+            <label class="metodo-card">
+                <input type="radio" name="metodoPago" value="Visa" hidden>
+                <img src="assets/media/visa.png" alt="Visa">
+                <span>Visa / Tarjeta</span>
+            </label>
+
+            <label class="metodo-card">
+                <input type="radio" name="metodoPago" value="Yape" hidden>
+                <img src="assets/media/yape.png" alt="Yape">
+                <span>Yape</span>
+            </label>
+        </div>
         <!-- Botón de pagar -->
-        <button id="finalizarCompra" class="btn-red" style="margin-top:20px;">Confirmar Compra</button>
-        
+        <!-- No tocar por ahora <button id="finalizarCompra" class="btn-finalizar" style="margin-top:20px;" disabled>Confirmar Compra</button> -->
+
 
     </main>
 
@@ -100,9 +117,42 @@
         <img src="assets/media/wasap.png" alt="WhatsApp">
     </a>
 
+    <!-- 🔹 Modal Visa -->
+    <div id="visaModal" class="modal">
+        <div class="modal-content visa-style">
+            <h2>Pago con Visa</h2>
 
-    <!-- Script para mostrar carrito -->
+            <form id="visaForm">
+                <div class="card-preview">
+                    <img src="assets/media/visa.png" alt="Visa" class="card-logo">
+                    <input type="text" id="numeroTarjeta" placeholder="Número de tarjeta" maxlength="16" required>
+                    <div class="card-row">
+                        <input type="text" id="fechaExp" placeholder="MM/AA" required>
+                        <input type="text" id="cvv" placeholder="CVV" maxlength="3" required>
+                    </div>
+                    <input type="text" id="nombreTarjeta" placeholder="Nombre del titular" required>
+                </div>
+
+                <button type="submit" class="btn-pagar">💳 Pagar</button>
+                <button type="button" class="btn-cerrar" onclick="cerrarModal()">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 🔹 Modal Yape -->
+    <div id="yapeModal" class="modal">
+        <div class="modal-content">
+            <h2>Pago con Yape</h2>
+            <img src="assets/img/qr_yape.png" alt="QR Yape" class="qr">
+            <p>Escanea el QR y luego haz clic en “Confirmar pago”.</p>
+            <button class="btn-pagar" id="confirmarYape">Confirmar pago</button>
+            <button class="btn-cerrar" onclick="cerrarModal()">Cancelar</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="assets/js/compra.js"></script>
+
 </body>
 
 </html>
