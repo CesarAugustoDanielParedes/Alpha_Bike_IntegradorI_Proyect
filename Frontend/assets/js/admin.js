@@ -748,6 +748,7 @@ function buildBannersTable(banners) {
 }
 
 // 🔑 FUNCIÓN CORREGIDA: Llama a la API y Renderiza la tabla de Banners
+// 🔑 FUNCIÓN CORREGIDA: Llama a la API y Renderiza la tabla de Banners
 async function loadBannersModule() {
     const contentArea = document.getElementById('contentArea');
     contentArea.innerHTML = `
@@ -756,19 +757,20 @@ async function loadBannersModule() {
         <div id="bannersTableContainer">Cargando banners...</div>
     `;
     
-    // Conectar el botón al formulario real
     document.getElementById('addBannerBtn').addEventListener('click', () => showBannerForm(null));
 
     try {
         const token = localStorage.getItem('authToken');
-        // Llama a la API protegida para obtener TODOS los banners
         const res = await fetch('http://localhost:3000/api/admin/banners', {
             headers: { 'Authorization': `Bearer ${token}` }
         });
 
         if (res.status === 401 || res.status === 403) throw new Error('Sesión expirada o permisos insuficientes.');
 
-        const banners = await res.json();
+        // 🚨 CORRECCIÓN CLAVE: 
+        const data = await res.json(); // Lee la respuesta UNA SOLA VEZ
+        const banners = Array.isArray(data) ? data : []; // Asegura que 'banners' SIEMPRE es un array
+        
         const tableContainer = document.getElementById('bannersTableContainer');
         
         if (banners.length === 0) {
@@ -782,7 +784,6 @@ async function loadBannersModule() {
         contentArea.innerHTML = `<p style="color: red;">ERROR: No se pudieron cargar los banners. ${error.message}</p>`;
     }
 }
-
 
 async function showBannerForm(bannerId = null) {
     const contentArea = document.getElementById('contentArea');

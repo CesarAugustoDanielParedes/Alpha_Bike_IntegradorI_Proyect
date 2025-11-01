@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Verificación de Correo</title>
+    <link rel="stylesheet" href="assets/css/iniciosesion.css"> </head>
+<body>
+    <section class="auth-section" style="background-image: url('assets/media/fondologin.jpg');">
+        <div class="auth-overlay"></div>
+        <div class="auth-container">
+            <h2>Verificación de Correo</h2>
+            <p>Ingresa el código de 6 dígitos que enviamos a tu correo.</p>
+
+            <form class="auth-form" id="formVerificacion">
+                <div class="input-group">
+                    <span class="icon">📧</span>
+                    <input type="email" id="correoVerif" placeholder="Correo electrónico" required readonly>
+                </div>
+                <div class="input-group">
+                    <span class="icon">#</span>
+                    <input type="text" id="codigoVerif" placeholder="Código de 6 dígitos" maxlength="6" required>
+                </div>
+                <button type="submit" class="btn-primary">Verificar y Activar</button>
+            </form>
+            <p id="resendLink" style="font-size: 0.9em;"></p>
+        </div>
+    </section>
+    
+    <script src="assets/js/verificacion.js"></script>
+</body>
+</html>

@@ -14,6 +14,8 @@ ProductoController.obtenerDisponibles = async (req, res) => {
                 p.Precio AS precio, 
                 p.ImagenURL AS imagen, 
                 p.Stock, 
+                p.SKU AS SKU,              
+                p.Descripcion AS Descripcion, 
                 m.Nombre AS marca,
                 m.LogoURL AS logo, 
                 c.Nombre AS categoria
@@ -43,8 +45,8 @@ ProductoController.obtenerTodos = async (req, res) => {
                 c.Nombre AS CategoriaNombre, m.Nombre AS MarcaNombre,
                 p.CategoriaID, p.MarcaID 
             FROM Productos p
-            JOIN Categorias c ON p.CategoriaID = c.CategoriaID
-            JOIN Marcas m ON p.MarcaID = m.MarcaID
+            LEFT JOIN Categorias c ON p.CategoriaID = c.CategoriaID
+            LEFT JOIN Marcas m ON p.MarcaID = m.MarcaID
         `;
         const params = [];
 
@@ -76,7 +78,7 @@ ProductoController.crearProducto = async (req, res) => {
     const parsedStock = parseInt(stock);
 
     if (isNaN(parsedPrecio) || isNaN(parsedStock) || parsedPrecio <= 0 || parsedStock < 0) {
-         return res.status(400).json({ error: 'Precio o Stock tienen valores inválidos.' });
+        return res.status(400).json({ error: 'Precio o Stock tienen valores inválidos.' });
     }
 
     try {

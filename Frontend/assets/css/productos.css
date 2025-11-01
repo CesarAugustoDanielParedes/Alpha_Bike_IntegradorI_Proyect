@@ -354,3 +354,49 @@ body {
     background: #e63946;
     transform: scale(1.1);
 }
+/* Asegúrate que tu CSS tenga estas reglas para las tarjetas */
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 20px;
+}
+.producto-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    text-align: center;
+}
+.producto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.producto-img {
+    max-height: 200px;
+    width: 90%;
+    object-fit: contain; /* Ajusta la imagen sin recortar */
+    margin: 10px auto;
+}
+
+.producto-info {
+    padding: 10px 15px;
+    flex-grow: 1;
+}
+
+.producto-info strong {
+    color: #f44336; /* Color para precio */
+    font-size: 1.3rem;
+    display: block;
+    margin: 5px 0;
+}
+.producto-info .stock {
+    color: #4caf50; /* Color verde para stock */
+    font-weight: bold;
+    font-size: 0.9rem;
+}
