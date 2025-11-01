@@ -85,17 +85,23 @@ async function fetchCategorias() {
 // 3. MÓDULO PRODUCTOS (CRUD y BÚSQUEDA)
 // ----------------------------------------------------
 
+// assets/js/admin.js (Función buildProductosTable)
+
 function buildProductosTable(productos) {
     let html = '<table border="1"><thead><tr><th>ID</th><th>Nombre</th><th>Marca</th><th>Precio</th><th>Stock</th><th>Activo</th><th>Acciones</th></tr></thead><tbody>';
     
     productos.forEach(p => {
         const activoText = p.Activo ? '✅ Sí' : '❌ No';
+        
+        // 🚨 CORRECCIÓN CLAVE: CONVERTIR p.Precio a flotante antes de usar toFixed()
+        const precioFormateado = parseFloat(p.Precio).toFixed(2); 
+
         html += `
             <tr data-product-id="${p.ProductoID}">
                 <td>${p.ProductoID}</td>
                 <td>${p.Nombre} (${p.SKU})</td>
                 <td>${p.MarcaNombre}</td>
-                <td>S/ ${p.Precio.toFixed(2)}</td>
+                <td>S/ ${precioFormateado}</td> 
                 <td>${p.Stock}</td>
                 <td>${activoText}</td>
                 <td class="action-buttons">
@@ -109,6 +115,7 @@ function buildProductosTable(productos) {
     html += '</tbody></table>';
     return html;
 }
+
 
 async function loadProductosModule(searchTerm = '') {
     const contentArea = document.getElementById('contentArea');
@@ -140,10 +147,49 @@ async function loadProductosModule(searchTerm = '') {
             headers: { 'Authorization': `Bearer ${token}` }
         });
 
-        if (res.status === 401 || res.status === 403) throw new Error('Sesión expirada o permisos insuficientes.');
+                if (res.status === 401 || res.status === 403) throw new Error('Sesión expirada o permisos insuficientes.');
         
-        const productos = await res.json();
-        const tableContainer = document.getElementById('productosTableContainer');
+                // ¡CORRECCIÓN! Verificar si la respuesta es exitosa (ej: 200 OK)
+                if (!res.ok) {
+                    // Si el servidor responde con un error (ej: 500), lanzamos un error para que lo capture el bloque CATCH
+                    throw new Error(`Error del servidor: ${res.status} ${res.statusText}`);
+                }
+        
+                                const data = await res.json();
+        
+                        
+        
+                                // DEBUG: Mostrar en consola qué estamos recibiendo exactamente
+        
+                                console.log('Respuesta del servidor para productos:', data);
+        
+                        
+        
+                                // DEFENSA: Asegurarse de que 'productos' sea un array.
+        
+                                // A veces la API puede devolver { "products": [...] } o { "data": [...] }
+        
+                                let productos = [];
+        
+                                if (Array.isArray(data)) {
+        
+                                    productos = data;
+        
+                                } else if (data && Array.isArray(data.products)) {
+        
+                                    productos = data.products;
+        
+                                } else if (data && Array.isArray(data.data)) {
+        
+                                    productos = data.data;
+        
+                                }
+        
+                        
+        
+                
+        
+                        const tableContainer = document.getElementById('productosTableContainer');
 
         if (productos.length === 0 && !searchTerm) {
             tableContainer.innerHTML = '<p>No hay productos registrados. Agrega uno nuevo.</p>';
@@ -436,6 +482,12 @@ async function loadClientesModule(searchTerm = '') {
         
         if (res.status === 401 || res.status === 403) throw new Error('Sesión expirada o permisos insuficientes.');
 
+        // ¡CORRECCIÓN! Verificar si la respuesta es exitosa (ej: 200 OK)
+        if (!res.ok) {
+            // Si el servidor responde con un error (ej: 500), lanzamos un error para que lo capture el bloque CATCH
+            throw new Error(`Error del servidor: ${res.status} ${res.statusText}`);
+        }
+
         const clientes = await res.json();
         document.getElementById('clientesTableContainer').innerHTML = buildClientesTable(clientes);
 
@@ -696,6 +748,7 @@ function buildBannersTable(banners) {
 }
 
 // 🔑 FUNCIÓN CORREGIDA: Llama a la API y Renderiza la tabla de Banners
+// 🔑 FUNCIÓN CORREGIDA: Llama a la API y Renderiza la tabla de Banners
 async function loadBannersModule() {
     const contentArea = document.getElementById('contentArea');
     contentArea.innerHTML = `
@@ -704,19 +757,20 @@ async function loadBannersModule() {
         <div id="bannersTableContainer">Cargando banners...</div>
     `;
     
-    // Conectar el botón al formulario real
     document.getElementById('addBannerBtn').addEventListener('click', () => showBannerForm(null));
 
     try {
         const token = localStorage.getItem('authToken');
-        // Llama a la API protegida para obtener TODOS los banners
         const res = await fetch('http://localhost:3000/api/admin/banners', {
             headers: { 'Authorization': `Bearer ${token}` }
         });
 
         if (res.status === 401 || res.status === 403) throw new Error('Sesión expirada o permisos insuficientes.');
 
-        const banners = await res.json();
+        // 🚨 CORRECCIÓN CLAVE: 
+        const data = await res.json(); // Lee la respuesta UNA SOLA VEZ
+        const banners = Array.isArray(data) ? data : []; // Asegura que 'banners' SIEMPRE es un array
+        
         const tableContainer = document.getElementById('bannersTableContainer');
         
         if (banners.length === 0) {
@@ -730,7 +784,6 @@ async function loadBannersModule() {
         contentArea.innerHTML = `<p style="color: red;">ERROR: No se pudieron cargar los banners. ${error.message}</p>`;
     }
 }
-
 
 async function showBannerForm(bannerId = null) {
     const contentArea = document.getElementById('contentArea');

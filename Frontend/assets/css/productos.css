@@ -274,3 +274,129 @@ body {
 .whatsapp img:hover {
   transform: scale(1.1);
 }
+
+/* Navbar Buttons */
+.navbar .btn {
+    display: inline-block;
+    padding: 8px 18px;
+    margin: 0 5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    color: #fff;
+    background: linear-gradient(135deg, #d32f2f, #e63946);
+    /* rojo consistente con tu branding */
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(230, 57, 70, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.navbar .btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 18px rgba(230, 57, 70, 0.6);
+    background: linear-gradient(135deg, #e63946, #d32f2f);
+}
+
+.navbar .btn:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow: 0 3px 10px rgba(230, 57, 70, 0.4);
+}
+
+
+/* Buscador Navbar */
+.navbar .search {
+    display: flex;
+    align-items: center;
+    background: #13234a;
+    /* azul oscuro ligeramente distinto al navbar */
+    padding: 4px;
+    border-radius: 30px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    margin-left: 20px;
+}
+
+.navbar .search:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
+}
+
+.navbar .search input {
+    border: none;
+    outline: none;
+    padding: 8px 15px;
+    border-radius: 30px 0 0 30px;
+    font-size: 0.9rem;
+    width: 180px;
+    background: #0a1a2f;
+    /* mismo color que el navbar */
+    color: #fff;
+}
+
+.navbar .search input::placeholder {
+    color: #ccc;
+}
+
+.navbar .search button {
+    border: none;
+    background: #d32f2f;
+    /* rojo consistente */
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 0 30px 30px 0;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.navbar .search button:hover {
+    background: #e63946;
+    transform: scale(1.1);
+}
+/* Asegúrate que tu CSS tenga estas reglas para las tarjetas */
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 20px;
+}
+.producto-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    text-align: center;
+}
+.producto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.producto-img {
+    max-height: 200px;
+    width: 90%;
+    object-fit: contain; /* Ajusta la imagen sin recortar */
+    margin: 10px auto;
+}
+
+.producto-info {
+    padding: 10px 15px;
+    flex-grow: 1;
+}
+
+.producto-info strong {
+    color: #f44336; /* Color para precio */
+    font-size: 1.3rem;
+    display: block;
+    margin: 5px 0;
+}
+.producto-info .stock {
+    color: #4caf50; /* Color verde para stock */
+    font-weight: bold;
+    font-size: 0.9rem;
+}

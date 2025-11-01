@@ -1,57 +1,36 @@
+
 // Backend/db.js
+const mysql = require('mysql2/promise');
 
-const sql = require('mssql');
-
-// Configuración de la conexión a SQL Server
+// Configuración de la conexión a MySQL
 const config = {
-    server: 'BRADD\\SQLEXPRESS',
-    port: 1433,
-    database: 'AlphaBikeDB',
-    user: 'sas',
-    options: {
-        // Estas opciones son correctas para un entorno de desarrollo local con SQL Server Express/Developer
-        encrypt: false, 
-        trustServerCertificate: true, 
-        trustedConnection: true // Usando autenticación de Windows
-    },
-    // Configuración del Pool: define cuántas conexiones se mantienen abiertas
-    pool: { 
-        max: 10, 
-        min: 0, 
-        idleTimeoutMillis: 30000 
-    }
+    host: 'localhost',
+    user: 'root',
+    password: '12345', // <-- ¡REEMPLAZA ESTO CON TU CONTRASEÑA REAL DE MYSQL!
+    database: 'AlphaBikeDB', // NOMBRE DE LA BASE DE DATOS
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 };
 
-// Variable para almacenar la conexión del pool (Singleton)
-let pool; 
+// Crear el pool de conexiones
+const pool = mysql.createPool(config);
 
-/**
- * Función para conectar o devolver la conexión existente del pool.
- * Esto evita crear un nuevo pool en cada llamada a la API.
- */
-async function conectar() {
-    if (pool && pool.connected) {
-        // Si el pool ya existe y está conectado, devolverlo inmediatamente
-        return pool;
-    }
-
+// Función para probar la conexión al iniciar
+async function testConnection() {
     try {
-        // Conectar y almacenar la conexión en la variable pool
-        pool = await sql.connect(config);
-        console.log('✅ Conectado a SQL Server (Pool establecido)');
-        
-        // Manejar errores de desconexión futura
-        pool.on('error', err => {
-            console.error('❌ Error fatal del pool de SQL Server:', err);
-            // Si hay un error, el pool se marcará como desconectado
-        });
-        
-        return pool;
-    } catch (err) {
-        console.error('❌ Error al conectar a SQL Server:', err);
-        throw new Error('No se pudo establecer la conexión con la base de datos.');
+        const connection = await pool.getConnection();
+        console.log('✅ Conectado a MySQL (Pool establecido)');
+        connection.release(); // Devolver la conexión al pool
+    } catch (error) {
+        console.error('❌ Error al conectar a MySQL:', error);
+        // Si hay un error, el proceso se detendrá, ya que la BD es crucial.
+        process.exit(1);
     }
 }
 
-// Exportar tanto el objeto 'sql' (para los tipos de datos) como la función 'conectar'
-module.exports = { sql, conectar };
+// Probar la conexión una vez al inicio del módulo
+testConnection();
+
+// Exportar el pool para que pueda ser usado en los controladores
+module.exports = pool;

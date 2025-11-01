@@ -6,28 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alpha Bike - Productos</title>
     <link rel="stylesheet" href="assets/css/productos.css">
-</head>
+    </head>
 
 <body>
 
-    <!-- HEADER -->
     <header class="navbar">
         <div class="logo">
             <img src="assets/media/logoalphabike.png" alt="Logo Alpha Bike">
         </div>
-
         <nav class="menu">
-            <a href="inicio.html">Inicio</a>
-            <a href="servicios.html">Servicios</a>
-            <a href="productos.html">Productos</a>
-            <a href="https://wa.me/51912543818">Contacto</a>
+            <a href="inicio.html" class="btn">Inicio</a>
+            <a href="servicios.html" class="btn">Servicios</a>
+            <a href="productos.html" class="btn">Productos</a>
+            <a href="https://wa.me/51912543818" class="btn">Contacto</a>
         </nav>
-
         <div class="search">
             <input type="text" placeholder="Buscar...">
             <button>🔍</button>
         </div>
-
         <div class="actions">
             <a href="registrarse.html" class="btn">Registrarse</a>
             <a href="iniciosesion.html" class="btn">Acceder</a>
@@ -39,9 +35,7 @@
         </div>
     </header>
 
-    <!-- MAIN -->
     <main class="productos-page">
-        <!-- FILTROS -->
         <aside class="filtros">
             <h3>Ordenar por:</h3>
             <select id="ordenar">
@@ -63,25 +57,43 @@
 
             <h3>Productos:</h3>
             <div id="filtroProductos">
-                <!-- checkboxes generados en JS -->
-            </div>
+                </div>
 
             <h3>Marcas:</h3>
             <div id="filtroMarcas">
-                <!-- checkboxes generados en JS -->
-            </div>
+                </div>
         </aside>
 
-        <!-- LISTA DE PRODUCTOS -->
         <section class="productos-grid" id="productosGrid">
-            <!-- tarjetas dinámicas -->
-        </section>
+            </section>
     </main>
 
-    <!-- FOOTER -->
+    <div id="productDetailModal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+
+            <div class="modal-media">
+                <img id="modal-image" src="" alt="Imagen del producto">
+                <img id="modal-logo" src="" alt="Marca Logo" class="modal-brand-logo">
+            </div>
+
+            <div class="modal-info">
+                <h3 id="modal-title"></h3>
+                <p id="modal-sku" class="detail-sku"></p>
+                <p id="modal-description" class="detail-description"></p>
+                
+                <div class="modal-row">
+                    <div id="modal-price" class="modal-price"></div>
+                    <button class="btn-red" id="modalAddToCartBtn" data-product-id="">Añadir al Carrito</button>
+                </div>
+                <p class="detail-stock" id="modal-stock-status"></p>
+            </div>
+        </div>
+    </div>
+
+
     <footer class="footer">
         <div class="footer-container">
-            <!-- IZQUIERDA -->
             <div class="footer-left">
                 <img src="assets/media/logoalphabike.png" alt="Alpha Bike Logo" class="footer-logo">
                 <h3>ALPHA BIKE</h3>
@@ -90,7 +102,6 @@
                 <p>📞 +51 912 543 818</p>
             </div>
 
-            <!-- CENTRO -->
             <div class="footer-center">
                 <h4>Productos</h4>
                 <ul>
@@ -101,7 +112,6 @@
                 </ul>
             </div>
 
-            <!-- DERECHA -->
             <div class="footer-right">
                 <h4>Horarios</h4>
                 <p>Lunes - Viernes: 8:00 am - 8:00 pm</p>
@@ -117,20 +127,15 @@
             </div>
         </div>
 
-        <!-- SEGUNDO FOOTER -->
         <div class="footer-bottom">
             <p>© 2025 ALPHA BIKE. Todos los derechos reservados.</p>
         </div>
     </footer>
-    <!-- BOTÓN WHATSAPP -->
     <a href="https://wa.me/51912543818" class="whatsapp" target="_blank">
         <img src="assets/media/wasap.png" alt="WhatsApp">
     </a>
 
-
-
-
-    <script src="assets/js/inicio.js"></script>
+    <script src="assets/js/productos.js"></script> 
 </body>
 
 </html>
