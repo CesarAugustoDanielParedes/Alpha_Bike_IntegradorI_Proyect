@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recuperar contraseña - Alpha Bike</title>
+  <link rel="stylesheet" href="assets/css/recuperar.css">
+</head>
+<body>
+  <section class="auth-section" style="background-image: url('assets/media/fondologin.jpg');">
+    <div class="auth-overlay"></div>
+    <div class="auth-container">
+      <!-- Logo -->
+      <div class="auth-logo">
+        <img src="assets/media/logoalphabike2.png" alt="Alpha Bike">
+      </div>
+
+      <h2>Recuperar contraseña</h2>
+
+      <!-- Paso 1: solicitar correo -->
+      <form class="auth-form" id="solicitar-codigo-form">
+        <p>Ingresa tu correo electrónico y te enviaremos un código para restablecer tu contraseña.</p>
+        <div class="input-group">
+          <span class="icon">📧</span>
+          <input type="email" id="correo" placeholder="Correo electrónico" required>
+        </div>
+        <button type="submit" class="btn-primary">Enviar código</button>
+      </form>
+
+      <!-- Paso 2: verificar código -->
+      <form class="auth-form hidden" id="verificar-codigo-form">
+        <p>Hemos enviado un código a tu correo. Ingrésalo a continuación:</p>
+        <div class="input-group">
+          <span class="icon">🔢</span>
+          <input type="text" id="codigo" placeholder="Código de verificación" maxlength="6" required>
+        </div>
+        <button type="submit" class="btn-primary">Verificar código</button>
+      </form>
+
+      <!-- Paso 3: nueva contraseña -->
+      <form class="auth-form hidden" id="nueva-contrasena-form">
+        <p>Ingresa tu nueva contraseña:</p>
+        <div class="input-group">
+          <span class="icon">🔑</span>
+          <input type="password" id="nuevaContrasena" placeholder="Nueva contraseña" required>
+        </div>
+        <button type="submit" class="btn-primary">Actualizar contraseña</button>
+      </form>
+
+      <p class="switch-link">
+        <a href="iniciosesion.html">Volver al inicio de sesión</a>
+      </p>
+    </div>
+  </section>
+
+  <script src="assets/js/recuperar.js"></script>
+</body>
+</html>
