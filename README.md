@@ -20,7 +20,7 @@ El sistema web automatizado permitirá:
 
 - Maven instalado
 
-- SQL Server con la base de datos AlphaBikeDB disponible en localhost:1433
+- MySQL Server con la base de datos AlphaBikeDB disponible en localhost:1433
 ---
 ## 🔐 Credenciales del panel admin 
 - **Usuario:** admin@alphabike.com
