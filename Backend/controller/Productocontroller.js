@@ -1,5 +1,5 @@
+// Backend/controllers/producto.controller.js
 
-// Backend/controllers/producto.controller.js (MIGRADO A MYSQL)
 const pool = require('../db');
 
 const ProductoController = {};

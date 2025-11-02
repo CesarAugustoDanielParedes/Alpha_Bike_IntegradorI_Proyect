@@ -2,7 +2,7 @@
 const jwt = require('jsonwebtoken');
 
 // ** DEBE SER LA MISMA CLAVE SECRETA QUE USAS EN user.service.js **
-const JWT_SECRET = 'admin123'; 
+const JWT_SECRET = process.env.JWT_SECRET; 
 
 // 1. Función para verificar que el usuario está autenticado (tiene un token válido)
 const verificarToken = (req, res, next) => {
@@ -35,19 +35,24 @@ const verificarToken = (req, res, next) => {
 
 
 // 2. Función para verificar el rol del usuario (usa la función anterior)
+// Backend/middleware/auth.middleware.js (Función verificarRol CORREGIDA)
+
 const verificarRol = (rolRequerido) => {
-    // Esta función devuelve un middleware que verifica el rol
     return (req, res, next) => {
-        // El objeto req.usuario ya contiene { id, rol } si verificarToken se ejecutó antes
-        if (req.usuario && req.usuario.rol === rolRequerido) {
-            next(); // El rol coincide, permitir el acceso
+        // Obtenemos el rol del JWT y lo convertimos a minúsculas
+        const userRole = req.usuario && req.usuario.rol ? req.usuario.rol.toLowerCase() : '';
+        
+        // Convertimos el rol requerido a minúsculas para la comparación
+        const required = rolRequerido.toLowerCase(); // Esto será siempre 'administrador'
+        
+        if (userRole === required) { // ✅ La comparación ahora es segura
+            next(); 
         } else {
-            // El usuario está autenticado pero no tiene el rol necesario
             return res.status(403).json({ error: 'Permiso denegado. No tienes el rol requerido.' });
         }
     };
 };
-
+// ...
 
 module.exports = {
     verificarToken,

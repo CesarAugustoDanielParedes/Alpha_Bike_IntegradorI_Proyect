@@ -71,3 +71,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// ----------------------------------------------------
+// MANEJO DEL ENLACE "¿Has olvidado la contraseña?"
+// ----------------------------------------------------
+
+document.addEventListener('DOMContentLoaded', () => {
+    const forgotLink = document.querySelector('.forgot-link');
+
+    if (forgotLink) {
+        forgotLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Redirigir a la nueva página de recuperación de contraseña
+            window.location.href = 'recuperar.html';
+        });
+    }
+});

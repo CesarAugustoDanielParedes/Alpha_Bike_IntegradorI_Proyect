@@ -18,10 +18,9 @@ AuthController.registroCliente = async (req, res) => {
         res.json(result);
 
     } catch (err) {
-        console.error('🔥 ERROR en el controlador de registro:', err.message);
-        // Devolver el error específico del servicio o un error genérico
-        res.status(400).json({ error: err.message.includes('Error en el servicio') ? err.message : 'Error al procesar el registro.' });
-    }
+    console.error('🔥 ERROR en el controlador de registro:', err);
+    res.status(400).json({ error: err.message || 'Error desconocido en el registro.' });
+}
 };
 
 // controllers/auth.controller.js (Añadir este método)

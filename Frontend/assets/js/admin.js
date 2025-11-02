@@ -15,6 +15,8 @@ let catalogData = {
 };
 const PEDIDO_STATUS = ['Pendiente', 'En Proceso', 'Enviado', 'Completado', 'Cancelado'];
 
+
+
 // Función auxiliar para construir opciones de SELECT (usada en formularios)
 const buildOptions = (items, selectedId) => {
     return items.map(item => {
@@ -71,7 +73,7 @@ async function fetchMarcas() {
         return res.status === 200 ? res.json() : [];
     } catch (e) { return []; }
 }
-
+console.log('Admin JS cargado. Usuario:', currentAdmin.name, 'Rol:', currentAdmin.role, 'Token:', currentAdmin.token);
 async function fetchCategorias() {
     try {
         // Usamos la ruta pública para cargar en SELECTs
@@ -85,15 +87,13 @@ async function fetchCategorias() {
 // 3. MÓDULO PRODUCTOS (CRUD y BÚSQUEDA)
 // ----------------------------------------------------
 
-// assets/js/admin.js (Función buildProductosTable)
-
 function buildProductosTable(productos) {
     let html = '<table border="1"><thead><tr><th>ID</th><th>Nombre</th><th>Marca</th><th>Precio</th><th>Stock</th><th>Activo</th><th>Acciones</th></tr></thead><tbody>';
     
     productos.forEach(p => {
         const activoText = p.Activo ? '✅ Sí' : '❌ No';
         
-        // 🚨 CORRECCIÓN CLAVE: CONVERTIR p.Precio a flotante antes de usar toFixed()
+        // CORRECCIÓN CLAVE: CONVERTIR p.Precio a flotante antes de usar toFixed()
         const precioFormateado = parseFloat(p.Precio).toFixed(2); 
 
         html += `
@@ -117,6 +117,7 @@ function buildProductosTable(productos) {
 }
 
 
+// 🔑 FUNCIÓN CORREGIDA para manejar errores 500/404/etc.
 async function loadProductosModule(searchTerm = '') {
     const contentArea = document.getElementById('contentArea');
     contentArea.innerHTML = `
@@ -147,49 +148,32 @@ async function loadProductosModule(searchTerm = '') {
             headers: { 'Authorization': `Bearer ${token}` }
         });
 
-                if (res.status === 401 || res.status === 403) throw new Error('Sesión expirada o permisos insuficientes.');
+        // 🚨 1. VERIFICACIÓN CLAVE DE SEGURIDAD (401/403)
+        if (res.status === 401 || res.status === 403) {
+            throw new Error('Sesión expirada o permisos insuficientes.');
+        }
+
+        // 🚨 2. Manejo de Errores Genéricos (400, 500, etc.)
+        if (!res.ok) {
+             // Intentamos leer el cuerpo del error para obtener un mensaje más descriptivo
+             const errorData = await res.json().catch(() => ({})); 
+             throw new Error(errorData.error || `Error del servidor (Código: ${res.status}).`);
+        }
         
-                // ¡CORRECCIÓN! Verificar si la respuesta es exitosa (ej: 200 OK)
-                if (!res.ok) {
-                    // Si el servidor responde con un error (ej: 500), lanzamos un error para que lo capture el bloque CATCH
-                    throw new Error(`Error del servidor: ${res.status} ${res.statusText}`);
-                }
+        // 3. Si el estado es 200 OK, procedemos a leer la data
+        const data = await res.json();
         
-                                const data = await res.json();
+        // 4. DEFENSA: Asegurarse de que 'productos' sea un array.
+        let productos = [];
+        if (Array.isArray(data)) {
+            productos = data;
+        } else if (data && Array.isArray(data.products)) {
+            productos = data.products;
+        } else if (data && Array.isArray(data.data)) {
+            productos = data.data;
+        }
         
-                        
-        
-                                // DEBUG: Mostrar en consola qué estamos recibiendo exactamente
-        
-                                console.log('Respuesta del servidor para productos:', data);
-        
-                        
-        
-                                // DEFENSA: Asegurarse de que 'productos' sea un array.
-        
-                                // A veces la API puede devolver { "products": [...] } o { "data": [...] }
-        
-                                let productos = [];
-        
-                                if (Array.isArray(data)) {
-        
-                                    productos = data;
-        
-                                } else if (data && Array.isArray(data.products)) {
-        
-                                    productos = data.products;
-        
-                                } else if (data && Array.isArray(data.data)) {
-        
-                                    productos = data.data;
-        
-                                }
-        
-                        
-        
-                
-        
-                        const tableContainer = document.getElementById('productosTableContainer');
+        const tableContainer = document.getElementById('productosTableContainer');
 
         if (productos.length === 0 && !searchTerm) {
             tableContainer.innerHTML = '<p>No hay productos registrados. Agrega uno nuevo.</p>';
@@ -200,9 +184,11 @@ async function loadProductosModule(searchTerm = '') {
         }
 
     } catch (error) {
+        // Muestra el error más detallado
         document.getElementById('productosTableContainer').innerHTML = `<p style="color: red;">ERROR: No se pudieron cargar los datos. ${error.message}</p>`;
     }
 }
+
 
 async function showProductForm(productoId = null, mode = 'create') {
     const contentArea = document.getElementById('contentArea');
@@ -390,6 +376,12 @@ async function loadPedidosModule() {
         });
 
         if (res.status === 401 || res.status === 403) throw new Error('Sesión expirada o permisos insuficientes.');
+        
+        // Manejo de Errores Genéricos para Pedidos
+        if (!res.ok) {
+            const errorData = await res.json().catch(() => ({})); 
+            throw new Error(errorData.error || `Error del servidor (Código: ${res.status}).`);
+        }
 
         const pedidos = await res.json();
         document.getElementById('pedidosTableContainer').innerHTML = buildPedidosTable(pedidos);
@@ -481,11 +473,11 @@ async function loadClientesModule(searchTerm = '') {
         const res = await fetch(url, { headers: { 'Authorization': `Bearer ${token}` } });
         
         if (res.status === 401 || res.status === 403) throw new Error('Sesión expirada o permisos insuficientes.');
-
-        // ¡CORRECCIÓN! Verificar si la respuesta es exitosa (ej: 200 OK)
+        
+        // Manejo de Errores Genéricos para Clientes
         if (!res.ok) {
-            // Si el servidor responde con un error (ej: 500), lanzamos un error para que lo capture el bloque CATCH
-            throw new Error(`Error del servidor: ${res.status} ${res.statusText}`);
+            const errorData = await res.json().catch(() => ({}));
+            throw new Error(errorData.error || `Error del servidor (Código: ${res.status}).`);
         }
 
         const clientes = await res.json();
@@ -545,6 +537,12 @@ async function fetchSimpleTable(endpoint, title, idField, nameField, extraFields
         });
 
         if (res.status === 401 || res.status === 403) throw new Error('Permisos insuficientes.');
+        
+        // Manejo de Errores Genéricos para Tablas Auxiliares
+        if (!res.ok) {
+            const errorData = await res.json().catch(() => ({}));
+            throw new Error(errorData.error || `Error del servidor (Código: ${res.status}).`);
+        }
         
         const data = await res.json();
         const tableContainer = document.getElementById('tableContainer');
@@ -748,7 +746,6 @@ function buildBannersTable(banners) {
 }
 
 // 🔑 FUNCIÓN CORREGIDA: Llama a la API y Renderiza la tabla de Banners
-// 🔑 FUNCIÓN CORREGIDA: Llama a la API y Renderiza la tabla de Banners
 async function loadBannersModule() {
     const contentArea = document.getElementById('contentArea');
     contentArea.innerHTML = `
@@ -766,8 +763,13 @@ async function loadBannersModule() {
         });
 
         if (res.status === 401 || res.status === 403) throw new Error('Sesión expirada o permisos insuficientes.');
-
-        // 🚨 CORRECCIÓN CLAVE: 
+        
+        // Manejo de Errores Genéricos para Banners
+        if (!res.ok) {
+            const errorData = await res.json().catch(() => ({}));
+            throw new Error(errorData.error || `Error del servidor (Código: ${res.status}).`);
+        }
+        
         const data = await res.json(); // Lee la respuesta UNA SOLA VEZ
         const banners = Array.isArray(data) ? data : []; // Asegura que 'banners' SIEMPRE es un array
         

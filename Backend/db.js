@@ -6,8 +6,8 @@ const mysql = require('mysql2/promise');
 const config = {
     host: 'localhost',
     user: 'root',
-    password: '', // <-- ¡REEMPLAZA ESTO CON TU CONTRASEÑA REAL DE MYSQL!
-    database: 'AlphaBikeDB', // NOMBRE DE LA BASE DE DATOS
+    password: '12345', // <-- ¡REEMPLAZA ESTO CON TU CONTRASEÑA REAL DE MYSQL!
+    database: 'alphabikedb', // NOMBRE DE LA BASE DE DATOS
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0

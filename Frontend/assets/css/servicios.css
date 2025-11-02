@@ -418,3 +418,53 @@ body {
     background: #e63946;
     transform: scale(1.1);
 }
+.usuario-logueado {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    cursor: pointer;
+}
+
+.usuario-circular {
+    width: 35px;
+    height: 35px;
+    background: #fff;
+    color: #0a1a2f;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.usuario-nombre {
+    color: #fff;
+    font-weight: 500;
+}
+
+.dropdown {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    background: #fff;
+    color: #0a1a2f;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.dropdown.hidden {
+    display: none;
+}
+
+.dropdown button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #0a1a2f;
+    font-weight: 500;
+}

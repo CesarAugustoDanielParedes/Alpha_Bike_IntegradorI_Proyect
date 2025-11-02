@@ -28,9 +28,11 @@
             <button>🔍</button>
         </div>
 
-        <div class="actions">
-            <a href="registrarse.html" class="btn">Registrarse</a>
-            <a href="iniciosesion.html" class="btn">Acceder</a>
+        <div class="actions" id="acciones-usuario">
+      <!-- Aquí se mostrará: 
+       - botones Registrarse / Acceder si NO está logueado
+       - icono + nombre si SÍ está logueado
+  -->
             <div class="cart">
                 <a href="carrito.html" class="cart">
                   🛒 <span id="cart-count">0</span>
@@ -146,6 +148,7 @@
 
 
     <script src="assets/js/servicios.js"></script>
+    <script src="assets/js/header.js"></script>
 </body>
 
 </html>
